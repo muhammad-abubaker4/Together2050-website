@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Together2050 — Together, We Create What Matters.">
   <rect width="1200" height="630" fill="#0B0B0B"/>
-  <rect x="0" y="0" width="8" height="630" fill="#fc0000"/>
-  <text x="80" y="210" fill="#fc0000" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="8">TOGETHER2050</text>
-  <text x="80" y="310" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600">Together, We Create</text>
-  <text x="80" y="380" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600">What Matters.</text>
-  <text x="80" y="520" fill="#A39E92" font-family="Arial, Helvetica, sans-serif" font-size="22">A platform for people, ideas, and opportunities.</text>
-  <text x="980" y="560" fill="#F4EFE6" fill-opacity="0.08" font-family="Arial, Helvetica, sans-serif" font-size="180" font-weight="600" text-anchor="end">2050</text>
+  <text x="1172" y="320" text-anchor="end" fill="#FFFFFF" fill-opacity="0.05" font-family="Arial, Helvetica, sans-serif" font-size="268" font-weight="500" letter-spacing="-22">2050</text>
+  <text x="40" y="44" fill="#fc0000" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="3.2">TOGETHER</text>
+  <text x="168" y="44" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="3.2">2050</text>
+  <text x="330" y="42" fill="#fc0000" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">HOME</text>
+  <text x="390" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">ABOUT</text>
+  <text x="458" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">VISION</text>
+  <text x="528" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">WHAT WE DO</text>
+  <text x="640" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">TEAM</text>
+  <text x="698" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">COLLABORATE</text>
+  <text x="822" y="42" fill="#F4EFE6" fill-opacity="0.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">CONTACT</text>
+  <rect x="1020" y="20" width="140" height="36" fill="#fc0000"/>
+  <text x="1090" y="43" text-anchor="middle" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="2">GET INVOLVED</text>
+  <text x="40" y="390" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="500">Together, We Create</text>
+  <text x="40" y="452" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="500">What Matters.</text>
+  <text x="40" y="500" fill="#D6D0C4" font-family="Arial, Helvetica, sans-serif" font-size="16">A platform that brings people, ideas, and opportunities together to learn,</text>
+  <text x="40" y="522" fill="#D6D0C4" font-family="Arial, Helvetica, sans-serif" font-size="16">collaborate, contribute, and create meaningful progress toward 2050 and beyond.</text>
+  <rect x="40" y="548" width="148" height="40" fill="#fc0000"/>
+  <text x="114" y="573" text-anchor="middle" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="1.8">GET INVOLVED</text>
+  <rect x="200" y="548" width="220" height="40" fill="none" stroke="#F4EFE6" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="310" y="573" text-anchor="middle" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" letter-spacing="1.8">EXPLORE TOGETHER2050</text>
 </svg>
