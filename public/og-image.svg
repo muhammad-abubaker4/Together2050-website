@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Together2050 — Together, We Create What Matters.">
+  <rect width="1200" height="630" fill="#0B0B0B"/>
+  <rect x="0" y="0" width="8" height="630" fill="#fc0000"/>
+  <text x="80" y="210" fill="#fc0000" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="8">TOGETHER2050</text>
+  <text x="80" y="310" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600">Together, We Create</text>
+  <text x="80" y="380" fill="#F4EFE6" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600">What Matters.</text>
+  <text x="80" y="520" fill="#A39E92" font-family="Arial, Helvetica, sans-serif" font-size="22">A platform for people, ideas, and opportunities.</text>
+  <text x="980" y="560" fill="#F4EFE6" fill-opacity="0.08" font-family="Arial, Helvetica, sans-serif" font-size="180" font-weight="600" text-anchor="end">2050</text>
+</svg>

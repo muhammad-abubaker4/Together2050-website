@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://together2050.com/sitemap.xml

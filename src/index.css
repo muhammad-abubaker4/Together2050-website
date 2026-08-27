@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0b0b0b;
+  --color-ink-soft: #161616;
+  --color-paper: #f4efe6;
+  --color-cream: #e8e1d4;
+  --color-red: #fc0000;
+  --color-red-deep: #d40000;
+  --color-muted: #3f3c36;
+  --color-stone: #d6d0c4;
+  --color-line: #2a2a2a;
+  --color-line-light: #d9d2c4;
+
+  --shadow-none: 0 0 #0000;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-ink font-sans text-paper antialiased;
+    margin: 0;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 72rem;
+}
+
+@media (min-width: 768px) {
+  .container-site {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-site {
+    padding-inline: 2.5rem;
+    max-width: 80rem;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}

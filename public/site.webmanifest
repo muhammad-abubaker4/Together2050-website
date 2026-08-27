@@ -1,0 +1,23 @@
+{
+  "name": "Together2050",
+  "short_name": "Together2050",
+  "description": "Together, We Create What Matters.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0B",
+  "theme_color": "#0B0B0B",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
