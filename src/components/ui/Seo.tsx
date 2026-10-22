@@ -39,9 +39,19 @@ export function Seo({
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[property="og:image"]', "content", OG_IMAGE);
     setMeta('meta[name="twitter:image"]', "content", OG_IMAGE);
-    setMeta('meta[property="og:image:width"]', "content", "2400");
-    setMeta('meta[property="og:image:height"]', "content", "1260");
+    setMeta('meta[property="og:image:width"]', "content", "1024");
+    setMeta('meta[property="og:image:height"]', "content", "626");
     setMeta('meta[property="og:image:type"]', "content", "image/png");
+    setMeta(
+      'meta[property="og:image:alt"]',
+      "content",
+      "Together2050 homepage: Together, We Create What Matters.",
+    );
+    setMeta(
+      'meta[name="twitter:image:alt"]',
+      "content",
+      "Together2050 homepage: Together, We Create What Matters.",
+    );
 
     let robots = document.querySelector('meta[name="robots"]');
     if (!robots) {

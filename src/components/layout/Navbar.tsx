@@ -3,23 +3,21 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "../../data/site";
 import { BrandMark } from "../content/BrandMark";
-import { Button } from "../ui/Button";
 import { cn } from "../../lib/cn";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
   const panelId = useId();
   const wasOpen = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -47,9 +45,7 @@ export function Navbar() {
       const root = headerRef.current;
       if (!root) return [];
       return Array.from(
-        root.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled])',
-        ),
+        root.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
       ).filter((el) => {
         if (el.closest("[hidden]")) return false;
         return el.getClientRects().length > 0;
@@ -107,24 +103,24 @@ export function Navbar() {
       )}
     >
       <div className="container-site flex h-16 items-center justify-between gap-3 sm:gap-4 lg:h-[4.25rem]">
-        <Link
-          to="/"
-          className="min-w-0 shrink"
-          aria-label="Together2050 home"
-        >
+        <Link to="/" className="min-w-0 shrink" aria-label="Together2050 home">
           <BrandMark imgClassName="h-6 max-w-[9.5rem] sm:h-7 sm:max-w-[11rem] md:h-8 md:max-w-[13.5rem]" />
         </Link>
 
-        <nav className="hidden items-center gap-5 xl:flex xl:gap-7" aria-label="Primary">
+        <nav className="hidden items-center gap-x-3 xl:flex xl:gap-x-4" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
-              end={link.to === "/"}
+              end={link.to === "/" || link.to === "/team"}
               className={({ isActive }) =>
                 cn(
-                  "text-[0.68rem] font-medium tracking-[0.18em] uppercase transition-colors",
-                  isActive ? "text-red" : "text-paper/80 hover:text-paper",
+                  "text-[0.62rem] font-medium tracking-[0.12em] uppercase transition-colors",
+                  isActive ||
+                    (link.to === "/what-we-do" &&
+                      location.pathname.startsWith("/events"))
+                    ? "text-red"
+                    : "text-paper/80 hover:text-paper",
                 )
               }
             >
@@ -132,12 +128,6 @@ export function Navbar() {
             </NavLink>
           ))}
         </nav>
-
-        <div className="hidden xl:block">
-          <Button to="/contact" variant="primary" className="px-5 py-2.5">
-            Get Involved
-          </Button>
-        </div>
 
         <button
           ref={menuButtonRef}
@@ -154,7 +144,6 @@ export function Navbar() {
 
       <div
         id={panelId}
-        ref={panelRef}
         hidden={!open}
         className={cn(
           "border-t border-paper/10 bg-ink xl:hidden",
@@ -176,22 +165,22 @@ export function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
-              end={link.to === "/"}
+              end={link.to === "/" || link.to === "/team"}
+              onClick={closeMenu}
               className={({ isActive }) =>
                 cn(
-                  "border-b border-paper/10 py-3 text-sm tracking-[0.16em] uppercase",
-                  isActive ? "text-red" : "text-paper",
+                  "block border-b border-paper/10 py-3 text-sm tracking-[0.16em] uppercase",
+                  isActive ||
+                    (link.to === "/what-we-do" &&
+                      location.pathname.startsWith("/events"))
+                    ? "font-semibold text-red"
+                    : "text-paper",
                 )
               }
             >
               {link.label}
             </NavLink>
           ))}
-          <div className="pt-5">
-            <Button to="/contact" variant="primary" className="w-full">
-              Get Involved
-            </Button>
-          </div>
           <p className="pt-6 text-xs tracking-wide text-stone">{SITE.tagline}</p>
         </div>
       </div>

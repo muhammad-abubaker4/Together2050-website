@@ -1,294 +1,407 @@
-import { ArrowRight } from "lucide-react";
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Portrait } from "../components/content/Portrait";
 import { Button } from "../components/ui/Button";
-import { CTASection } from "../components/content/CTASection";
-import { LaunchFilm } from "../components/content/LaunchFilm";
-import { OrganizationJsonLd } from "../components/content/OrganizationJsonLd";
-import { PillarCard } from "../components/content/PillarCard";
-import { Wordmark } from "../components/content/Wordmark";
-import { Reveal } from "../components/ui/Reveal";
 import { Seo } from "../components/ui/Seo";
-import { offerings } from "../data/offerings";
+import {
+  eventPhaseLabel,
+  speakerSeries,
+  speakerSessions,
+} from "../data/events";
 import { pillars } from "../data/pillars";
-import { PAGE_SEO, SITE } from "../data/site";
-import { values } from "../data/values";
+import { FORMS, PAGE_SEO } from "../data/site";
+import { founder, founderMessage } from "../data/team";
+import { cn } from "../lib/cn";
+
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export function Home() {
   return (
     <main id="main-content">
       <Seo {...PAGE_SEO.home} />
-      <OrganizationJsonLd />
       <Hero />
-      <WhySection />
-      <PillarsSection />
-      <OfferingsSection />
-      <ValuesSection />
-      <VisionSection />
-      <CollaboratePreview />
-      <LaunchFilm />
-      <FinalStatement />
+      <Idea />
+      <Ecosystem />
+      <Building />
+      <Borders />
+      <FounderSection />
+      <TakePart />
+      <Close />
     </main>
   );
 }
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] items-end bg-ink pt-24 pb-16 sm:pb-20 lg:pb-24">
+    <section className="relative overflow-hidden bg-ink pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-40 lg:pb-32">
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 flex items-start justify-end overflow-hidden pt-[12%]"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 bottom-8 hidden select-none md:block md:pr-6 lg:bottom-12 lg:pr-8 xl:top-1/2 xl:bottom-auto xl:-translate-y-1/2 xl:pr-12"
       >
-        <p className="w-full max-w-full pr-[4%] text-right font-medium leading-none tracking-[-0.08em] text-white/5 text-[clamp(4.5rem,23vw,16rem)]">
-          2050
+        <p className="text-right font-semibold leading-[0.78] tracking-[-0.06em] text-white/25 text-[5.75rem] lg:text-[8rem] xl:text-[13rem]">
+          20
+          <br />
+          50
         </p>
       </div>
-
-      <div className="container-site relative z-10 w-full">
-        <h1 className="max-w-4xl text-4xl font-medium leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
+      <div className="container-site relative">
+        <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
+          A global, community-driven initiative
+        </p>
+        <h1 className="mt-5 max-w-4xl text-4xl font-medium leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
           Together, We Create What Matters.
         </h1>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-stone text-pretty sm:text-lg">
-          {SITE.description}
-        </p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button to="/contact" variant="primary">
-            Get Involved
-          </Button>
-          <Button to="/about" variant="secondary">
-            Explore Together2050
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhySection() {
-  return (
-    <section className="bg-paper py-20 text-ink sm:py-24 lg:py-32">
-      <div className="container-site grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_1.1fr] lg:gap-20">
-        <Reveal>
-          <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
-            Introduction
+        <div className="mt-6 max-w-xl">
+          <p className="text-base leading-relaxed text-stone text-pretty sm:text-lg">
+            Together2050 connects people, ideas, and opportunities to turn
+            shared aspirations into meaningful action. We are building a
+            community-driven ecosystem where people can learn, collaborate,
+            create initiatives, and contribute to a better future.
           </p>
-          <h2 className="mt-4 text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
-            Why Together2050?
-          </h2>
-        </Reveal>
-        <Reveal delay={80}>
-          <div className="space-y-5 text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            <p>Nothing meaningful is built in isolation.</p>
-            <p>
-              Every idea needs someone who believes in it. Every opportunity
-              begins somewhere. Progress grows when people share what they know,
-              open doors for others, and build something beyond themselves.
-            </p>
-            <p>
-              Together2050 exists to create a place where people can learn,
-              connect, exchange ideas, create, and contribute.
-            </p>
-            <Link
-              to="/about"
-              className="group mt-4 inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase text-ink"
+          <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button to="/about" className="w-full sm:w-auto">
+              Explore Together2050
+            </Button>
+            <Button
+              href={FORMS.membership}
+              variant="secondary"
+              className="w-full sm:w-auto"
+              {...external}
             >
-              Learn more about us
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
+              Become Part of the Community
+            </Button>
           </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function PillarsSection() {
-  return (
-    <section className="bg-ink py-20 sm:py-24 lg:py-32">
-      <div className="container-site">
-        <Reveal>
-          <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
-            Four pillars
-          </p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            What We Stand On
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
-            Together2050 stands on four core pillars that guide its direction
-            and decisions.
-          </p>
-        </Reveal>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
-          {pillars.map((pillar, index) => (
-            <Reveal key={pillar.number} delay={index * 60}>
-              <PillarCard pillar={pillar} />
-            </Reveal>
-          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function OfferingsSection() {
+function Idea() {
   return (
-    <section className="bg-paper py-20 text-ink sm:py-24 lg:py-32">
-      <div className="container-site">
-        <Reveal>
-          <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
-            Spaces and opportunities
-          </p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            What We Do
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Together2050 creates spaces and opportunities for people to learn,
-            connect, collaborate, and contribute.
-          </p>
-        </Reveal>
+    <section className="bg-paper py-16 text-ink sm:py-20 lg:py-28">
+      <div className="container-site grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+        <h2 className="max-w-md text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          Why Together2050 Exists
+        </h2>
+        <div>
+          <div className="max-w-xl space-y-4 text-base leading-relaxed text-muted text-pretty sm:text-lg">
+            <p>
+              Meaningful progress rarely happens in isolation. People have
+              knowledge, ideas, abilities, and aspirations, but they do not
+              always have the connections, opportunities, or collaborative
+              spaces needed to turn them into action.
+            </p>
+            <p>
+              Together2050 exists to help bring these elements together,
+              creating pathways for people and communities to learn, connect,
+              collaborate, and contribute.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+            <TextLink to="/about" tone="light">
+              Discover Our Purpose
+            </TextLink>
+            <TextLink to="/vision" tone="light">
+              Read the Vision
+            </TextLink>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        <ol className="mt-12 divide-y divide-ink/10 border-y border-ink/10">
-          {offerings.map((offering, index) => (
-            <Reveal key={offering.number} as="li" delay={index * 40}>
-              <div className="grid gap-3 py-8 md:grid-cols-[5rem_minmax(0,16rem)_1fr] md:gap-8">
-                <span className="text-[0.7rem] tracking-[0.22em] text-red">
-                  {offering.number}
-                </span>
-                <h3 className="text-xl font-medium tracking-tight">
-                  {offering.title}
-                </h3>
-                <p className="max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-                  {offering.description}
-                </p>
-              </div>
-            </Reveal>
+function Ecosystem() {
+  return (
+    <section className="bg-ink py-16 sm:py-20 lg:py-28">
+      <div className="container-site">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+          <h2 className="max-w-md text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+            An Ecosystem Built Around Possibility
+          </h2>
+          <p className="max-w-xl text-base leading-relaxed text-stone text-pretty sm:text-lg">
+            We believe progress grows when knowledge is shared, connections are
+            formed, potential is developed, and people contribute to something
+            beyond themselves.
+          </p>
+        </div>
+
+        <ol className="mt-14 border-l border-paper/20 lg:grid lg:grid-cols-4 lg:gap-8 lg:border-l-0 lg:border-t lg:pt-10">
+          {pillars.map((pillar) => (
+            <li key={pillar.number} className="relative py-8 pl-8 lg:py-0 lg:pl-0">
+              <span
+                aria-hidden
+                className="absolute top-10 -left-px h-2 w-2 -translate-x-1/2 bg-red lg:top-[-2.65rem] lg:left-0 lg:translate-x-0"
+              />
+              <p className="text-[0.7rem] font-medium tracking-[0.22em] text-red">
+                {pillar.number}
+              </p>
+              <h3 className="mt-4 text-2xl font-medium tracking-tight">
+                {pillar.title}
+              </h3>
+              <p className="mt-3 max-w-xs text-base leading-relaxed text-stone">
+                {pillar.preview}
+              </p>
+            </li>
           ))}
         </ol>
-
-        <Reveal>
-          <Link
-            to="/what-we-do"
-            className="group mt-10 inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase"
-          >
-            Read more about what we do
-            <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
-        </Reveal>
       </div>
     </section>
   );
 }
 
-function ValuesSection() {
-  return (
-    <section className="bg-ink py-20 sm:py-24 lg:py-32">
-      <div className="container-site">
-        <Reveal>
-          <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
-            Core values
-          </p>
-          <h2 className="mt-4 text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
-            What Guides Us
-          </h2>
-        </Reveal>
+function seriesWhen() {
+  const first = speakerSessions[0].dateLabel.split(" ");
+  const last = speakerSessions[speakerSessions.length - 1].dateLabel.split(" ");
+  if (first[1] === last[1] && first[2] === last[2]) {
+    return `${first[0]}–${last[0]} ${first[1]} ${first[2]}`;
+  }
+  return `${speakerSessions[0].dateLabel} – ${speakerSessions[speakerSessions.length - 1].dateLabel}`;
+}
 
-        <div className="mt-12 grid gap-px bg-paper/10 sm:grid-cols-2 lg:grid-cols-3">
-          {values.map((value, index) => (
-            <Reveal
-              key={value.number}
-              delay={index * 50}
-              className="bg-ink p-6 sm:p-8"
-            >
-              <p className="text-[0.7rem] tracking-[0.22em] text-red">
-                {value.number}
-              </p>
-              <h3 className="mt-6 text-xl font-medium tracking-tight">
-                {value.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-stone text-pretty">
-                {value.description}
-              </p>
-            </Reveal>
-          ))}
+function Building() {
+  return (
+    <section className="bg-paper py-16 text-ink sm:py-20 lg:py-28">
+      <div className="container-site">
+        <h2 className="max-w-3xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          From Shared Ideas to Meaningful Action
+        </h2>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
+          As the initiative grows, this work can take different forms, from
+          learning and research to community-led projects and partnerships.
+          What is confirmed is listed here.
+        </p>
+
+        <article className="mt-12 grid gap-6 border-y border-ink/10 py-8 sm:py-10 lg:grid-cols-[9rem_minmax(0,1fr)_auto] lg:items-end lg:gap-10">
+          <p className="text-[0.7rem] font-medium tracking-[0.22em] uppercase text-red">
+            {eventPhaseLabel()}
+          </p>
+          <div>
+            <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
+              {speakerSeries.title}
+            </h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+              {speakerSeries.theme}
+            </p>
+            <p className="mt-3 text-sm text-ink">
+              {seriesWhen()} · {speakerSeries.attendance}
+            </p>
+          </div>
+          <TextLink to={speakerSeries.path} tone="light">
+            View the series
+          </TextLink>
+        </article>
+
+        <div className="mt-8">
+          <TextLink to="/what-we-do" tone="light">
+            Explore Our Work
+          </TextLink>
         </div>
       </div>
     </section>
   );
 }
 
-function VisionSection() {
+function Borders() {
   return (
-    <section className="bg-cream py-20 text-ink sm:py-24 lg:py-32">
-      <div className="container-site grid gap-12 lg:grid-cols-2 lg:gap-20">
-        <Reveal>
-          <h2 className="text-2xl font-medium tracking-tight text-red sm:text-3xl">
-            Our Vision
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            We envision a future where people come together through shared
-            possibilities, where knowledge is accessible, ideas are exchanged
-            openly, and collective potential is transformed into meaningful
-            action.
-          </p>
-        </Reveal>
-        <Reveal delay={80}>
-          <h2 className="text-2xl font-medium tracking-tight text-red sm:text-3xl">
-            Our Mission
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            Our mission is not limited to preparing people for the future. It is
-            about enabling people to actively participate in creating it.
-          </p>
-          <Link
-            to="/vision"
-            className="group mt-8 inline-flex items-center gap-2 text-sm tracking-[0.12em] uppercase"
-          >
-            Read our vision and mission
-            <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function CollaboratePreview() {
-  return (
-    <CTASection
-      tone="light"
-      eyebrow="Partnerships"
-      title="Let's Build Together"
-      description="Together2050 believes that meaningful progress is strengthened through collaboration. We welcome opportunities to work with individuals, communities, organizations, institutions, and initiatives that share a commitment to knowledge, connection, empowerment, innovation, and meaningful contribution."
-      primaryLabel="Partner With Together2050"
-      primaryTo="/collaborate"
-    />
-  );
-}
-
-function FinalStatement() {
-  return (
-    <section className="bg-ink py-24 sm:py-32 lg:py-40">
+    <section className="bg-ink py-16 sm:py-20 lg:py-28">
       <div className="container-site">
-        <Reveal>
-          <h2 className="max-w-4xl text-4xl font-medium leading-[1.08] tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            The future is not built alone.
-            <span className="mt-3 block text-paper">It is built together.</span>
-          </h2>
-          <p className="mt-12 text-[0.72rem]">
-            <Wordmark />
+        <div className="max-w-3xl">
+        <h2 className="text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          Local Ideas. Shared Possibilities. A Wider Future.
+        </h2>
+        <div className="mt-6 space-y-4 text-base leading-relaxed text-stone text-pretty sm:text-lg">
+          <p>
+            Together2050 is being built with the ambition to connect people and
+            communities across different places and backgrounds. We want people
+            to contribute where they are, discover collaborators beyond their
+            immediate circles, and help meaningful ideas grow through shared
+            effort.
           </p>
-          <p className="mt-3 text-lg text-paper sm:text-xl">{SITE.tagline}</p>
-        </Reveal>
+          <p>
+            The long-term direction is global participation, supported by
+            meaningful local action and cross-community collaboration.
+          </p>
+        </div>
+        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+          <TextLink to="/get-involved">Get involved</TextLink>
+          <TextLink href={FORMS.collaboration}>Collaborate</TextLink>
+        </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function FounderSection() {
+  return (
+    <section className="bg-paper py-16 text-ink lg:py-20">
+      <div className="container-site grid items-start gap-10 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        <Portrait
+          person={founder}
+          priority
+          frameClassName="aspect-[4/5] w-full max-w-[18rem] border border-ink/10"
+        />
+        <div>
+          <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">
+            {founder.name}
+          </h2>
+          <p className="mt-2 text-[0.7rem] font-medium tracking-[0.16em] uppercase text-red">
+            Founder, Together2050
+          </p>
+          <div className="mt-4 space-y-2 text-base leading-normal text-muted text-pretty sm:text-lg">
+            {founderMessage.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TakePart() {
+  return (
+    <section className="bg-ink py-16 sm:py-20 lg:py-28">
+      <div className="container-site">
+        <h2 className="max-w-3xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          What Will You Build With Us?
+        </h2>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-stone text-pretty sm:text-lg">
+          You do not need to have everything figured out to contribute. Bring an
+          idea, a skill, a question, a community need, or a willingness to
+          collaborate. Together2050 is creating opportunities for people to
+          participate in work that matters.
+        </p>
+        <ol className="mt-10 border-t border-paper/15">
+          <Pathway
+            number="01"
+            title="Join the Community"
+            body="For people who want to connect, learn, and participate."
+            action="Join"
+            href={FORMS.membership}
+          />
+          <Pathway
+            number="02"
+            title="Contribute Your Skills"
+            body="For people who want to help with initiatives and collaborative work. Write to us and say how you can help."
+            action="Write to us"
+            to="/contact"
+          />
+          <Pathway
+            number="03"
+            title="Become an Ambassador"
+            body="For people interested in representing and supporting Together2050 in their communities. The ambassador form is how you put your name forward."
+            action="Ambassador"
+            href={FORMS.ambassador}
+          />
+          <Pathway
+            number="04"
+            title="Propose an Initiative"
+            body="For people who want to bring forward an idea or community project."
+            action="Propose"
+            href={FORMS.collaboration}
+          />
+          <Pathway
+            number="05"
+            title="Collaborate With Us"
+            body="For individuals, organizations, educational institutions, and other potential partners."
+            action="Collaborate"
+            href={FORMS.collaboration}
+          />
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Close() {
+  return (
+    <section className="bg-paper py-16 text-ink sm:py-20 lg:py-28">
+      <div className="container-site">
+        <h2 className="max-w-3xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          Built to keep connecting people, ideas, and opportunities.
+        </h2>
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
+          Together2050 is a long-term, community-driven initiative. Its purpose
+          is to make learning, collaboration, and contribution possible well
+          beyond any single event.
+        </p>
+        <div className="mt-8">
+          <TextLink to="/vision" tone="light">
+            Read the Vision
+          </TextLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TextLink({
+  to,
+  href,
+  children,
+  tone = "dark",
+}: {
+  to?: string;
+  href?: string;
+  children: ReactNode;
+  tone?: "dark" | "light";
+}) {
+  const className = cn(
+    "text-[0.7rem] font-medium tracking-[0.16em] uppercase transition-colors hover:text-red",
+    tone === "light" ? "text-ink" : "text-paper",
+  );
+
+  if (href) {
+    return (
+      <a href={href} className={className} {...external}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={to ?? "/"} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+function Pathway({
+  number,
+  title,
+  body,
+  action,
+  href,
+  to,
+}: {
+  number: string;
+  title: string;
+  body: string;
+  action: string;
+  href?: string;
+  to?: string;
+}) {
+  return (
+    <li className="grid gap-4 border-b border-paper/15 py-6 sm:grid-cols-[3rem_minmax(0,1fr)_15rem] sm:items-center sm:gap-8">
+      <p className="text-[0.7rem] tracking-[0.18em] text-red">{number}</p>
+      <div>
+        <h3 className="text-xl font-medium tracking-tight">{title}</h3>
+        <p className="mt-1 max-w-2xl text-sm leading-relaxed text-stone sm:text-base">
+          {body}
+        </p>
+      </div>
+      {href ? (
+        <Button href={href} className="w-full whitespace-nowrap" {...external}>
+          {action}
+        </Button>
+      ) : (
+        <Button to={to ?? "/contact"} className="w-full whitespace-nowrap">
+          {action}
+        </Button>
+      )}
+    </li>
   );
 }

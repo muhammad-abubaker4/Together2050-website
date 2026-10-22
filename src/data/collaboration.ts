@@ -15,6 +15,7 @@ export const collaborationAreas = [
 export const whyPartner = [
   "Together2050 brings together people, ideas, and opportunities to create meaningful progress. Through partnerships, we aim to create opportunities for shared learning, community engagement, knowledge exchange, innovation, and contribution.",
   "We believe the strongest partnerships are built on shared purpose, mutual respect, and a commitment to creating meaningful value.",
+  "As Together2050 continues to grow, partnerships will play an important role in bringing together diverse perspectives, resources, expertise, and opportunities.",
 ] as const;
 
 export type CollaborationStep = {

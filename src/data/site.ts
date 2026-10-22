@@ -4,29 +4,44 @@ export const SITE = {
   description:
     "A platform that brings people, ideas, and opportunities together to learn, collaborate, contribute, and create meaningful progress toward 2050 and beyond.",
   email: "info@together2050.com",
+  secondaryEmail: "officialtogether2050@gmail.com",
+  phones: ["+92 343 3729053"] as const,
+  whatsappChannel: "https://whatsapp.com/channel/0029VbCzuJBG8l5AlECIi803",
   url: "https://together2050.com",
-  established: "14 August 2026",
+  established: "10 August 2026",
   launch: "2 September 2026",
-  foundingDate: "2026-08-14",
+  foundingDate: "2026-08-10",
+} as const;
+
+export const FORMS = {
+  membership: "https://forms.gle/mh665nL992axAhz86",
+  ambassador: "https://forms.gle/d2bpooFtVWKDegJMA",
+  collaboration: "https://forms.gle/wZHoFjajShq6E9iA9",
 } as const;
 
 export const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Vision", to: "/vision" },
-  { label: "What We Do", to: "/what-we-do" },
+  { label: "Our Work", to: "/what-we-do" },
   { label: "Team", to: "/team" },
+  { label: "Advisory Council", to: "/team/advisory-council" },
   { label: "Collaborate", to: "/collaborate" },
-  { label: "Contact", to: "/contact" },
+  { label: "Get Involved", to: "/get-involved" },
 ] as const;
 
 export const FOOTER_LINKS = [
-  { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Vision & Mission", to: "/vision" },
-  { label: "What We Do", to: "/what-we-do" },
+  { label: "Vision", to: "/vision" },
+  { label: "Our Work", to: "/what-we-do" },
   { label: "Team", to: "/team" },
-  { label: "Collaborate", to: "/collaborate" },
+  { label: "Advisory Council", to: "/team/advisory-council" },
+] as const;
+
+export const PARTICIPATION_LINKS = [
+  { label: "Join the community", href: FORMS.membership },
+  { label: "Collaborate", href: FORMS.collaboration },
+  { label: "Get Involved", to: "/get-involved" },
   { label: "Contact", to: "/contact" },
 ] as const;
 
@@ -46,6 +61,14 @@ export const SOCIAL_LINKS = [
   {
     label: "TikTok",
     href: "https://www.tiktok.com/@together_2050",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@together2050",
+  },
+  {
+    label: "WhatsApp",
+    href: SITE.whatsappChannel,
   },
 ] as const;
 
@@ -68,16 +91,34 @@ export const PAGE_SEO = {
     path: "/vision",
   },
   whatWeDo: {
-    title: "What We Do | Together2050",
+    title: "Our Work | Together2050",
     description:
-      "Together2050 creates spaces and opportunities for people to learn, connect, collaborate, and contribute.",
+      "Programs, sessions, and the areas of work where Together2050 creates space to learn, connect, collaborate, and contribute.",
     path: "/what-we-do",
   },
-  team: {
-    title: "Our Team | Together2050",
+  getInvolved: {
+    title: "Get Involved | Together2050",
     description:
-      "Together2050 is built by people who believe that meaningful progress is a collective effort.",
+      "Join the Together2050 community, become an ambassador, or propose a collaboration.",
+    path: "/get-involved",
+  },
+  costOfPerfection: {
+    title: "The Cost of Perfection | Together2050",
+    description:
+      "An online speaker series on 24 and 25 October 2026, with Taskeen Idrees, Zain Ul Islam, Sama Zaidi, and Nageen Malik.",
+    path: "/events/the-cost-of-perfection",
+  },
+  team: {
+    title: "Team | Together2050",
+    description:
+      "Meet the Together2050 team: the founder, co-founder, executive leadership, directors, and team members.",
     path: "/team",
+  },
+  advisory: {
+    title: "Advisory Council | Together2050",
+    description:
+      "The Advisory Council of Together2050 brings together experienced professionals, educators, researchers, and youth leaders who contribute diverse perspectives and expertise.",
+    path: "/team/advisory-council",
   },
   collaborate: {
     title: "Let's Build Together | Together2050",
@@ -88,7 +129,7 @@ export const PAGE_SEO = {
   contact: {
     title: "Contact | Together2050",
     description:
-      "A conversation can become an opportunity. An idea can become action. Let's create what matters together.",
+      "Whether you have a question, an idea, or simply want to connect with Together2050, we'd be glad to hear from you.",
     path: "/contact",
   },
   notFound: {

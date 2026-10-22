@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { FOOTER_LINKS, SITE } from "../../data/site";
+import { FOOTER_LINKS, PARTICIPATION_LINKS, SITE } from "../../data/site";
 import { BrandMark } from "../content/BrandMark";
 import { SocialLinks } from "../content/SocialLinks";
 import { Container } from "../ui/Container";
 
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
+
 export function Footer() {
   return (
     <footer className="border-t border-paper/10 bg-ink text-paper">
-      <Container className="py-16 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr]">
+      <Container className="pt-16 pb-6 sm:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.9fr]">
           <div>
             <p>
               <BrandMark imgClassName="h-8 max-w-[14rem] sm:h-9" />
@@ -25,7 +27,7 @@ export function Footer() {
             <p className="text-[0.68rem] tracking-[0.22em] uppercase text-stone">
               Explore
             </p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
+            <ul className="mt-4 space-y-2.5">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.to}>
                   <Link
@@ -41,13 +43,41 @@ export function Footer() {
 
           <div>
             <p className="text-[0.68rem] tracking-[0.22em] uppercase text-stone">
-              Contact
+              Take part
             </p>
+            <ul className="mt-4 space-y-2.5">
+              {PARTICIPATION_LINKS.map((link) => (
+                <li key={link.label}>
+                  {"href" in link ? (
+                    <a
+                      href={link.href}
+                      className="text-sm text-paper/90 transition-colors hover:text-red"
+                      {...external}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      className="text-sm text-paper/90 transition-colors hover:text-red"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
             <a
               href={`mailto:${SITE.email}`}
-              className="mt-4 inline-block text-sm text-paper transition-colors hover:text-red"
+              className="mt-6 inline-block text-sm text-paper transition-colors hover:text-red"
             >
               {SITE.email}
+            </a>
+            <a
+              href={`mailto:${SITE.secondaryEmail}`}
+              className="mt-2 block text-sm text-stone transition-colors hover:text-red"
+            >
+              {SITE.secondaryEmail}
             </a>
             <SocialLinks className="mt-6" />
           </div>

@@ -13,27 +13,27 @@ export function CollaborationStep({
   const isDark = tone === "dark";
 
   return (
-    <li className="group relative flex gap-5">
-      <div className="flex flex-col items-center">
+    <li className="group relative flex gap-5 pb-10 last:pb-0">
+      <div className="relative w-10 shrink-0">
         <span
           className={cn(
-            "flex h-10 w-10 shrink-0 items-center justify-center border text-[0.7rem] tracking-[0.12em]",
+            "relative z-10 flex h-10 w-10 items-center justify-center border bg-paper text-[0.7rem] tracking-[0.12em]",
             isDark
-              ? "border-paper/20 text-paper"
-              : "border-ink/15 text-ink",
+              ? "border-paper/20 bg-transparent text-paper"
+              : "border-ink/15 text-red",
           )}
         >
           {step.number}
         </span>
         <span
           className={cn(
-            "mt-2 w-px flex-1 group-last:hidden",
-            isDark ? "bg-paper/10" : "bg-ink/10",
+            "absolute top-12 -bottom-6 left-1/2 w-px -translate-x-1/2 group-last:hidden",
+            isDark ? "bg-paper/20" : "bg-ink/15",
           )}
           aria-hidden
         />
       </div>
-      <div className="pb-10 last:pb-0">
+      <div>
         <h3
           className={cn(
             "text-lg font-medium tracking-tight sm:text-xl",

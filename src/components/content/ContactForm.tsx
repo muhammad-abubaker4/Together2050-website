@@ -3,13 +3,10 @@ import { SITE } from "../../data/site";
 import { Button } from "../ui/Button";
 import { cn } from "../../lib/cn";
 
-type Status = "idle" | "error" | "opened";
+type Status = "idle" | "error" | "sent";
+type Field = "name" | "email" | "message";
 
-const subjects = [
-  "Join the community",
-  "Collaborate with us",
-  "General enquiry",
-] as const;
+const subjects = ["General enquiry", "Question", "Idea"] as const;
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -19,17 +16,23 @@ export function ContactForm() {
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [invalidField, setInvalidField] = useState<Field | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  function validate() {
-    if (!name.trim()) return "Please enter your name.";
+  function validate(): { field: Field; message: string } | null {
+    if (!name.trim()) {
+      return { field: "name", message: "Please enter your name." };
+    }
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return "Please enter a valid email address.";
+      return { field: "email", message: "Please enter a valid email address." };
     }
     if (!message.trim() || message.trim().length < 12) {
-      return "Please share a little more in your message.";
+      return {
+        field: "message",
+        message: "Please share a little more in your message.",
+      };
     }
-    return "";
+    return null;
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -39,14 +42,16 @@ export function ContactForm() {
 
     const nextError = validate();
     if (nextError) {
-      setError(nextError);
+      setError(nextError.message);
+      setInvalidField(nextError.field);
       setStatus("error");
+      document.getElementById(nextError.field)?.focus();
       return;
     }
 
     setSubmitting(true);
     setError("");
-    setStatus("idle");
+    setInvalidField(null);
 
     const body = [
       `Name: ${name.trim()}`,
@@ -54,11 +59,12 @@ export function ContactForm() {
       "",
       message.trim(),
     ].join("\n");
-
-    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(`Together2050: ${subject}`)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
-    setStatus("opened");
-    window.setTimeout(() => setSubmitting(false), 800);
+
+    setStatus("sent");
+    setSubmitting(false);
+    document.getElementById("contact-status")?.focus();
   }
 
   const fieldClass =
@@ -66,11 +72,6 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5">
-      <p className="text-sm leading-relaxed text-muted">
-        Submitting this form opens your email app with a message addressed to{" "}
-        {SITE.email}. Together2050 does not send the message from this website.
-      </p>
-
       <div className="hidden" aria-hidden>
         <label htmlFor="company-website">Website</label>
         <input
@@ -95,6 +96,8 @@ export function ContactForm() {
           onChange={(event) => setName(event.target.value)}
           className={fieldClass}
           required
+          aria-invalid={invalidField === "name"}
+          aria-describedby={invalidField === "name" ? "contact-error" : undefined}
         />
       </div>
 
@@ -111,6 +114,8 @@ export function ContactForm() {
           onChange={(event) => setEmail(event.target.value)}
           className={fieldClass}
           required
+          aria-invalid={invalidField === "email"}
+          aria-describedby={invalidField === "email" ? "contact-error" : undefined}
         />
       </div>
 
@@ -147,24 +152,30 @@ export function ContactForm() {
           onChange={(event) => setMessage(event.target.value)}
           className={cn(fieldClass, "resize-y")}
           required
+          aria-invalid={invalidField === "message"}
+          aria-describedby={invalidField === "message" ? "contact-error" : undefined}
         />
       </div>
 
       {status === "error" ? (
-        <p role="alert" className="text-sm text-red">
+        <p id="contact-error" role="alert" className="text-sm text-red-deep">
           {error}
         </p>
       ) : null}
 
-      {status === "opened" ? (
-        <p role="status" className="text-sm text-muted">
-          If your email app opened, send the message from there. If it did not,
-          write to {SITE.email} directly. This website cannot confirm delivery.
+      {status === "sent" ? (
+        <p
+          id="contact-status"
+          role="status"
+          tabIndex={-1}
+          className="text-sm text-muted outline-none"
+        >
+          Your email app should open with this message. Send it to reach {SITE.email}. If it does not open, write to that address directly. This website does not send the message.
         </p>
       ) : null}
 
       <Button type="submit" variant="primary" disabled={submitting}>
-        {submitting ? "Opening email" : "Open in email"}
+        Submit
       </Button>
     </form>
   );

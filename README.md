@@ -32,7 +32,7 @@ The website should communicate this clearly through its design, content, structu
 
 ## Established
 
-**14 August 2026**
+**10 August 2026**
 
 ## Official Launch
 
@@ -589,7 +589,7 @@ Primary options:
 
 Official email:
 
-**[info@together2050.com](mailto:info@together2050.com)**
+**[officialtogether2050@gmail.com](mailto:officialtogether2050@gmail.com)**
 
 Do not invent additional emails.
 
@@ -612,7 +612,7 @@ TikTok:
 [www.tiktok.com/@together_2050](http://www.tiktok.com/@together_2050)
 
 Email:
-[info@together2050.com](mailto:info@together2050.com)
+[officialtogether2050@gmail.com](mailto:officialtogether2050@gmail.com)
 
 Do not add social accounts that are not listed here.
 

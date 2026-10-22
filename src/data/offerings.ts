@@ -9,30 +9,30 @@ export const offerings: Offering[] = [
     number: "01",
     title: "Learning & Knowledge",
     description:
-      "We create opportunities to learn, share knowledge, explore ideas, and develop useful skills through discussions, workshops, research, mentoring, and other learning initiatives.",
+      "Discussions, workshops, research, and mentoring through which people share knowledge and develop skills.",
   },
   {
     number: "02",
     title: "Connection & Community",
     description:
-      "We bring together people, communities, disciplines, and organizations to encourage meaningful connections, shared learning, and new opportunities.",
+      "Conversations that bring people from different communities, disciplines, and organizations together.",
   },
   {
     number: "03",
     title: "Projects & Collaboration",
     description:
-      "We encourage people to turn ideas into action through collaborative projects, initiatives, discussions, research, and solutions that address real needs and opportunities.",
+      "Shared projects in which people turn an idea into work on a real need.",
   },
   {
     number: "04",
     title: "Empowerment & Opportunity",
     description:
-      "We aim to create pathways for people to develop their abilities, discover opportunities, contribute their strengths, and take an active role in shaping their future.",
+      "Pathways for building ability, finding opportunities, and using individual strengths.",
   },
   {
     number: "05",
     title: "Community Contribution",
     description:
-      "We believe progress grows when people contribute beyond themselves. Together2050 supports initiatives and efforts where knowledge, skills, ideas, and collective action can create meaningful value for communities and society.",
+      "Efforts in which skills, ideas, and collective work create value for a community.",
   },
 ];

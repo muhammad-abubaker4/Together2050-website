@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local working files, not part of the website
+.pytools/
+assest/
+*.docx
+
 # Editor
 .vscode/*
 !.vscode/extensions.json

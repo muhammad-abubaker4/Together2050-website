@@ -1,5 +1,7 @@
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import { Button } from "../components/ui/Button";
+import { Seo } from "../components/ui/Seo";
+import { PAGE_SEO } from "../data/site";
 
 export function RouteError() {
   const error = useRouteError();
@@ -7,6 +9,17 @@ export function RouteError() {
 
   return (
     <main id="main-content" className="bg-ink">
+      <Seo
+        title={
+          isNotFound ? PAGE_SEO.notFound.title : "Something went wrong | Together2050"
+        }
+        description={
+          isNotFound
+            ? "The address may be incorrect, or the page may have moved."
+            : "This page could not be displayed. Refresh, or return to the Together2050 home page."
+        }
+        noindex
+      />
       <div className="container-site flex min-h-[70svh] flex-col justify-center py-28">
         <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
           {isNotFound ? "404" : "Error"}

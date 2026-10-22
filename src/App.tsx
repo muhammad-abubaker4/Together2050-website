@@ -1,12 +1,15 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import { About } from "./pages/About";
+import { AdvisoryCouncil } from "./pages/AdvisoryCouncil";
 import { Collaborate } from "./pages/Collaborate";
 import { Contact } from "./pages/Contact";
+import { CoreTeam } from "./pages/CoreTeam";
+import { EventDetail } from "./pages/EventDetail";
+import { GetInvolved } from "./pages/GetInvolved";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { RouteError } from "./pages/RouteError";
-import { Team } from "./pages/Team";
 import { VisionMission } from "./pages/VisionMission";
 import { WhatWeDo } from "./pages/WhatWeDo";
 
@@ -22,8 +25,12 @@ const router = createBrowserRouter([
           { path: "about", element: <About /> },
           { path: "vision", element: <VisionMission /> },
           { path: "what-we-do", element: <WhatWeDo /> },
-          { path: "team", element: <Team /> },
+          { path: "team", element: <CoreTeam /> },
+          { path: "team/core-team", element: <Navigate to="/team" replace /> },
+          { path: "team/advisory-council", element: <AdvisoryCouncil /> },
           { path: "collaborate", element: <Collaborate /> },
+          { path: "get-involved", element: <GetInvolved /> },
+          { path: "events/the-cost-of-perfection", element: <EventDetail /> },
           { path: "contact", element: <Contact /> },
           { path: "*", element: <NotFound /> },
         ],

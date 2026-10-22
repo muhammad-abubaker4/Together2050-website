@@ -38,7 +38,7 @@ const variantClasses: Record<Variant, string> = {
   ghost:
     "bg-transparent text-paper border-transparent hover:text-red px-0",
   "on-light":
-    "bg-transparent text-ink border border-ink/20 hover:border-ink hover:bg-ink hover:text-paper",
+    "bg-transparent text-ink border border-ink/20 hover:border-red hover:bg-red hover:text-paper",
 };
 
 export function Button(props: ButtonProps) {
@@ -78,6 +78,7 @@ export function Button(props: ButtonProps) {
       className={classes}
       disabled={buttonProps.disabled}
       onClick={buttonProps.onClick}
+      aria-describedby={buttonProps["aria-describedby"]}
     >
       {children}
     </button>
