@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SITE } from "../../data/site";
 
-const OG_IMAGE = `${SITE.url}/og-image.png`;
+const OG_IMAGE = `${SITE.url}/og-image.jpg`;
 
 type SeoProps = {
   title: string;
@@ -39,9 +39,9 @@ export function Seo({
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[property="og:image"]', "content", OG_IMAGE);
     setMeta('meta[name="twitter:image"]', "content", OG_IMAGE);
-    setMeta('meta[property="og:image:width"]', "content", "1024");
-    setMeta('meta[property="og:image:height"]', "content", "626");
-    setMeta('meta[property="og:image:type"]', "content", "image/png");
+    setMeta('meta[property="og:image:width"]', "content", "1200");
+    setMeta('meta[property="og:image:height"]', "content", "630");
+    setMeta('meta[property="og:image:type"]', "content", "image/jpeg");
     setMeta(
       'meta[property="og:image:alt"]',
       "content",
