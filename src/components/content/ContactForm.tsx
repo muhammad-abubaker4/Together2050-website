@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { SITE } from "../../data/site";
 import { Button } from "../ui/Button";
 import { cn } from "../../lib/cn";
@@ -19,6 +19,12 @@ export function ContactForm() {
   const [invalidField, setInvalidField] = useState<Field | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  useEffect(() => {
+    if (status === "sent") {
+      document.getElementById("contact-status")?.focus();
+    }
+  }, [status]);
+
   function validate(): { field: Field; message: string } | null {
     if (!name.trim()) {
       return { field: "name", message: "Please enter your name." };
@@ -35,10 +41,9 @@ export function ContactForm() {
     return null;
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting) return;
-    if (honeypot) return;
 
     const nextError = validate();
     if (nextError) {
@@ -53,30 +58,59 @@ export function ContactForm() {
     setError("");
     setInvalidField(null);
 
-    const body = [
-      `Name: ${name.trim()}`,
-      `Email: ${email.trim()}`,
-      "",
-      message.trim(),
-    ].join("\n");
-    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(`Together2050: ${subject}`)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    const body = new URLSearchParams();
+    for (const [key, value] of new FormData(event.currentTarget)) {
+      body.append(key, String(value));
+    }
 
-    setStatus("sent");
-    setSubmitting(false);
-    document.getElementById("contact-status")?.focus();
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!response.ok) {
+        throw new Error(`Form submission failed (${response.status})`);
+      }
+
+      setName("");
+      setEmail("");
+      setSubject(subjects[0]);
+      setMessage("");
+      setHoneypot("");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+      setError(
+        `Your message could not be sent. Please try again, or write to ${SITE.email}.`,
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const fieldClass =
     "w-full border border-ink/15 bg-paper px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-red";
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5">
+    <form
+      name="contact"
+      method="POST"
+      action="/"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      onSubmit={onSubmit}
+      noValidate
+      aria-busy={submitting}
+      className="space-y-5"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+
       <div className="hidden" aria-hidden>
-        <label htmlFor="company-website">Website</label>
+        <label htmlFor="bot-field">Do not fill this in</label>
         <input
-          id="company-website"
-          name="website"
+          id="bot-field"
+          name="bot-field"
           tabIndex={-1}
           autoComplete="off"
           value={honeypot}
@@ -130,7 +164,7 @@ export function ContactForm() {
           onChange={(event) =>
             setSubject(event.target.value as (typeof subjects)[number])
           }
-          className={cn(fieldClass, "appearance-none")}
+          className={fieldClass}
         >
           {subjects.map((item) => (
             <option key={item} value={item}>
@@ -170,12 +204,13 @@ export function ContactForm() {
           tabIndex={-1}
           className="text-sm text-muted outline-none"
         >
-          Your email app should open with this message. Send it to reach {SITE.email}. If it does not open, write to that address directly. This website does not send the message.
+          Thank you. Your message has been sent. Together2050 will reply to the
+          email address you entered.
         </p>
       ) : null}
 
       <Button type="submit" variant="primary" disabled={submitting}>
-        Submit
+        {submitting ? "Sending" : "Submit"}
       </Button>
     </form>
   );

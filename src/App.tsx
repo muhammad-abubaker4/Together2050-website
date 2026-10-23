@@ -3,7 +3,6 @@ import { Layout } from "./components/layout/Layout";
 import { About } from "./pages/About";
 import { AdvisoryCouncil } from "./pages/AdvisoryCouncil";
 import { Collaborate } from "./pages/Collaborate";
-import { Contact } from "./pages/Contact";
 import { CoreTeam } from "./pages/CoreTeam";
 import { EventDetail } from "./pages/EventDetail";
 import { GetInvolved } from "./pages/GetInvolved";
@@ -31,7 +30,7 @@ const router = createBrowserRouter([
           { path: "collaborate", element: <Collaborate /> },
           { path: "get-involved", element: <GetInvolved /> },
           { path: "events/the-cost-of-perfection", element: <EventDetail /> },
-          { path: "contact", element: <Contact /> },
+          { path: "contact", element: <Navigate to="/get-involved#contact" replace /> },
           { path: "*", element: <NotFound /> },
         ],
       },

@@ -16,3 +16,8 @@
   from = "/team/core-team"
   to = "/team"
   status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/get-involved#contact"
+  status = 301

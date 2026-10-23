@@ -287,7 +287,7 @@ function TakePart() {
             title="Contribute Your Skills"
             body="For people who want to help with initiatives and collaborative work. Write to us and say how you can help."
             action="Write to us"
-            to="/contact"
+            to="/get-involved#contact"
           />
           <Pathway
             number="03"
@@ -398,7 +398,7 @@ function Pathway({
           {action}
         </Button>
       ) : (
-        <Button to={to ?? "/contact"} className="w-full whitespace-nowrap">
+        <Button to={to ?? "/get-involved#contact"} className="w-full whitespace-nowrap">
           {action}
         </Button>
       )}

@@ -32,13 +32,13 @@ type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor;
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-red text-paper hover:bg-red-deep border border-red hover:border-red-deep",
+    "bg-red-deep text-paper hover:bg-[#b00000] border border-red-deep hover:border-[#b00000]",
   secondary:
     "bg-transparent text-paper border border-paper/25 hover:border-paper hover:bg-paper/5",
   ghost:
     "bg-transparent text-paper border-transparent hover:text-red px-0",
   "on-light":
-    "bg-transparent text-ink border border-ink/20 hover:border-red hover:bg-red hover:text-paper",
+    "bg-transparent text-ink border border-ink/20 hover:border-red-deep hover:bg-red-deep hover:text-paper",
 };
 
 export function Button(props: ButtonProps) {

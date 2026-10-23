@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Together2050 contact form</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <!--
+      Static copy for Netlify form detection. The Get Involved contact form is
+      rendered by JavaScript, so this file is what the deploy scan reads.
+      https://docs.netlify.com/manage/forms/setup
+    -->
+    <form
+      name="contact"
+      method="POST"
+      action="/"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <p>
+        <label>
+          Do not fill this in: <input name="bot-field" />
+        </label>
+      </p>
+      <p>
+        <label>
+          Name <input type="text" name="name" />
+        </label>
+      </p>
+      <p>
+        <label>
+          Email <input type="email" name="email" />
+        </label>
+      </p>
+      <p>
+        <label>
+          Subject
+          <select name="subject">
+            <option value="General enquiry">General enquiry</option>
+            <option value="Question">Question</option>
+            <option value="Idea">Idea</option>
+          </select>
+        </label>
+      </p>
+      <p>
+        <label>
+          Message <textarea name="message"></textarea>
+        </label>
+      </p>
+    </form>
+  </body>
+</html>

@@ -1,7 +1,7 @@
-import posterNageen from "../assets/events/nageen-malik.jpg";
-import posterSama from "../assets/events/sama-zaidi.jpg";
-import posterTaskeen from "../assets/events/taskeen-idrees.jpg";
-import posterZain from "../assets/events/zain-ul-islam.jpg";
+import posterNageen from "../assets/events/nageen-malik.webp";
+import posterSama from "../assets/events/sama-zaidi.webp";
+import posterTaskeen from "../assets/events/taskeen-idrees.webp";
+import posterZain from "../assets/events/zain-ul-islam.webp";
 
 export type EventPhase = "upcoming" | "in-progress" | "completed";
 
@@ -16,6 +16,8 @@ export type SpeakerSession = {
   timeLabel: string;
   startsAt: string;
   poster: string;
+  /** Printed poster title, when it differs from the approved session title. */
+  posterText?: string;
   width: number;
   height: number;
 };
@@ -48,23 +50,24 @@ export const speakerSessions: SpeakerSession[] = [
     timeLabel: "8:00 PM PKT",
     startsAt: `2026-10-24T20:00:00${STATUS_ZONE_OFFSET}`,
     poster: posterTaskeen,
-    width: 1122,
-    height: 1402,
+    width: 880,
+    height: 1100,
   },
   {
     id: "zain-ul-islam",
     speaker: "Zain Ul Islam",
     role: "Corporate Trainer",
-    title: "Beyond the Pressure",
-    subtitle: "Building a Healthier Definition of Success",
+    title: "Taking Ownership",
+    subtitle: "Accountability and Decisions Under Pressure",
     summary:
-      "Discover how to redefine achievement, build resilience, and make more balanced decisions in professional and personal life.",
+      "A session on taking ownership, accountability, and decisions under pressure.",
+    posterText: "Beyond the Pressure: Building a Healthier Definition of Success",
     dateLabel: "Saturday, 24 October 2026",
     timeLabel: "9:00 PM PKT",
     startsAt: `2026-10-24T21:00:00${STATUS_ZONE_OFFSET}`,
     poster: posterZain,
-    width: 1080,
-    height: 1350,
+    width: 880,
+    height: 1100,
   },
   {
     id: "sama-zaidi",
@@ -78,8 +81,8 @@ export const speakerSessions: SpeakerSession[] = [
     timeLabel: "8:00 PM PKT",
     startsAt: `2026-10-25T20:00:00${STATUS_ZONE_OFFSET}`,
     poster: posterSama,
-    width: 1122,
-    height: 1402,
+    width: 880,
+    height: 1100,
   },
   {
     id: "nageen-malik",
@@ -118,6 +121,11 @@ export function eventPhaseLabel(now = new Date()) {
 
 export function sessionTopic(session: SpeakerSession) {
   return `${session.title}: ${session.subtitle}`;
+}
+
+export function sessionImageAlt(session: SpeakerSession) {
+  const printed = session.posterText ?? sessionTopic(session);
+  return `${session.speaker}, ${session.role}. ${printed}. ${session.dateLabel}, ${session.timeLabel}, online.`;
 }
 
 export function sessionsByDate() {

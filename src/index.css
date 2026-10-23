@@ -72,3 +72,9 @@
 @utility text-pretty {
   text-wrap: pretty;
 }
+
+/* Small red type on white. #FC0000 is 4.08:1; #D40000 is 5.53:1. Buttons stay #FC0000. */
+.bg-paper .text-red,
+.bg-paper.text-red {
+  color: var(--color-red-deep);
+}

@@ -110,7 +110,7 @@ export function ProfileCard({ person }: ProfileCardProps) {
         <p className="text-[0.7rem] font-medium tracking-[0.16em] uppercase text-red">
           {position(person.role)}
         </p>
-        <h3 className="mt-3 text-2xl font-medium tracking-tight text-ink">{person.name}</h3>
+        <h2 className="mt-3 text-2xl font-medium tracking-tight text-ink">{person.name}</h2>
         <ProfileLinks person={person} />
         {person.bio ? (
           <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-ink text-pretty lg:mx-0">

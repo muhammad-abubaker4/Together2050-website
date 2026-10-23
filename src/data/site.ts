@@ -42,7 +42,7 @@ export const PARTICIPATION_LINKS = [
   { label: "Join the community", href: FORMS.membership },
   { label: "Collaborate", href: FORMS.collaboration },
   { label: "Get Involved", to: "/get-involved" },
-  { label: "Contact", to: "/contact" },
+  { label: "Contact", to: "/get-involved#contact" },
 ] as const;
 
 export const SOCIAL_LINKS = [
@@ -99,7 +99,7 @@ export const PAGE_SEO = {
   getInvolved: {
     title: "Get Involved | Together2050",
     description:
-      "Join the Together2050 community, become an ambassador, or propose a collaboration.",
+      "Join the Together2050 community, become an ambassador, propose a collaboration, or send an enquiry.",
     path: "/get-involved",
   },
   costOfPerfection: {
@@ -125,12 +125,6 @@ export const PAGE_SEO = {
     description:
       "Together2050 welcomes opportunities to work with individuals, communities, organizations, institutions, and initiatives that share a commitment to knowledge, connection, empowerment, innovation, and meaningful contribution.",
     path: "/collaborate",
-  },
-  contact: {
-    title: "Contact | Together2050",
-    description:
-      "Whether you have a question, an idea, or simply want to connect with Together2050, we'd be glad to hear from you.",
-    path: "/contact",
   },
   notFound: {
     title: "Page not found | Together2050",

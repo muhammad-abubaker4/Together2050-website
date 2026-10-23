@@ -11,6 +11,8 @@ export function BrandMark({ className, imgClassName }: BrandMarkProps) {
     <img
       src={getLogoSrc()}
       alt="Together2050"
+      width={1310}
+      height={155}
       className={cn(
         "w-auto",
         !imgClassName && "h-7 max-w-[11rem] sm:h-8 sm:max-w-[13.5rem]",

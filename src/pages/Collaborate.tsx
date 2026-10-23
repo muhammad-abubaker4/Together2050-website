@@ -29,7 +29,7 @@ export function Collaborate() {
         </div>
       </header>
 
-      <section className="bg-paper py-20 text-ink sm:py-24 lg:py-28">
+      <section className="bg-paper py-16 text-ink sm:py-20 lg:py-24">
         <div className="container-site">
           <Reveal>
             <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
@@ -39,20 +39,23 @@ export function Collaborate() {
               Where we can work together
             </h2>
           </Reveal>
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+          <ol className="mt-12 border-t border-ink/10">
             {collaborationAreas.map((area, index) => (
-              <Reveal key={area} as="li" delay={index * 30} className="h-full">
-                <div className="flex h-full flex-col border border-ink/10 p-6 transition-colors duration-200 motion-reduce:transition-none hover:border-red">
-                  <p className="text-[0.7rem] tracking-[0.2em] text-red">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p className="mt-4 text-lg font-medium tracking-tight text-ink">
-                    {area}
-                  </p>
-                </div>
+              <Reveal
+                key={area}
+                as="li"
+                delay={index * 30}
+                className="grid gap-3 border-b border-ink/10 py-5 sm:grid-cols-[4rem_minmax(0,1fr)] sm:items-center sm:gap-8 sm:py-6"
+              >
+                <p className="text-[0.7rem] font-medium tracking-[0.22em] text-red">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <p className="text-lg font-medium tracking-tight text-ink sm:text-xl">
+                  {area}
+                </p>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 

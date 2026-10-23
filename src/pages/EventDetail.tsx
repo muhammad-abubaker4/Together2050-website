@@ -4,6 +4,7 @@ import { Seo } from "../components/ui/Seo";
 import { PageHero } from "../components/ui/PageHero";
 import {
   eventPhaseLabel,
+  sessionImageAlt,
   sessionTopic,
   speakerSeries,
   speakerSessions,
@@ -109,7 +110,7 @@ export function EventDetail() {
               >
                 <img
                   src={session.poster}
-                  alt={`${session.speaker}, ${session.role}. ${sessionTopic(session)}. ${session.dateLabel}, ${session.timeLabel}, online.`}
+                  alt={sessionImageAlt(session)}
                   width={session.width}
                   height={session.height}
                   loading="lazy"
