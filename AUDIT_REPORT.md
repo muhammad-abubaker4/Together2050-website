@@ -2,11 +2,9 @@
 
 **Verdict: READY AFTER EXTERNAL VERIFICATION**
 
-Date: 23 October 2026. Production `https://together2050.com` was on Netlify and was serving commit `4d591ea` (`index-dpe0Gxxg.js`), including the contact-form fix. Nothing has been committed, pushed, deployed, or submitted to Google Search Console.
+Date: 23 October 2026. Section 2 is the production baseline from before these fixes, when Netlify was serving commit `4d591ea`. The fixes are now deployed as `40d8fd2`. Section 13 is the post-deploy check. Nothing was submitted to Google Search Console.
 
-The production Lighthouse tables in section 2 are the baseline. They were not rerun, because the fixes below are local only. A later local accessibility check is recorded separately in section 12 and is not a production score.
-
-Do not submit the sitemap until those fixes are deployed and the live redirects, cache headers, and canonical pages have been checked again. Search Console ownership and the manual items below are still open. Submitting a sitemap or requesting indexing does not guarantee indexing, ranking, or immediate Core Web Vitals data.
+Search Console ownership, the event-time decision, and the Google Form guest-access checks are still open. Submitting a sitemap or requesting indexing does not guarantee indexing, ranking, or immediate Core Web Vitals data.
 
 ## 1. Route inventory
 
@@ -31,7 +29,7 @@ Do not submit the sitemap until those fixes are deployed and the live redirects,
 
 No other public routes exist in the router. `/contact` is absent from the sitemap.
 
-**Duplicate URLs still live today:** `https://together2050.com/about.html`, `/get-involved.html`, `/events/the-cost-of-perfection.html`, `/index.html`, and `/about/index.html` returned HTTP 200. `/about.html` is indexable and carries the correct canonical `https://together2050.com/about`. The same pattern applies to the other flat copies. A fix is prepared and is not deployed. See section 10.
+**Duplicate URLs at the baseline:** `https://together2050.com/about.html`, `/get-involved.html`, `/events/the-cost-of-perfection.html`, `/index.html`, and `/about/index.html` returned HTTP 200. That was fixed in the deploy recorded in section 13.
 
 ## 2. PageSpeed and Lighthouse
 
@@ -143,7 +141,7 @@ No internal link points at a removed page. No redirect loop was found.
 | WebPage JSON-LD on the other indexable HTML shells | PASS |
 | Event JSON-LD | Present in the React page for the real sessions. It is not in the initial HTML, which contains WebPage JSON-LD until JavaScript runs. Rich Results Test: NOT TESTED. |
 | Accidental `noindex` on public pages | PASS, none found |
-| Flat `.html` duplicates | FAIL on production today. Canonicals point at the clean URL. Fix prepared, not deployed. |
+| Flat `.html` duplicates | PASS after the deploy in section 13. At the baseline they returned HTTP 200 with the correct canonical. |
 
 Heading order and image alt text did not fail Lighthouse accessibility on the measured pages, except the Get Involved color-only link noted below.
 
@@ -179,7 +177,7 @@ No secrets were found in the audited source. No third-party analytics script is 
 | `vercel.json` | The same redirects, so the unused Vercel config does not diverge. Production is Netlify. |
 | `src/pages/GetInvolved.tsx` | Underline the closing “Collaborate” link. The sentence and destination are unchanged. |
 
-Details and command results are in section 12. Production still serves the old `.html` duplicates and `max-age=0` until the next deploy. After-deploy Lighthouse: NOT TESTED.
+Details and command results are in sections 12 and 13. The deploy and the later Lighthouse comparison are in section 13.
 
 ## 9. Remaining risks
 
@@ -209,7 +207,7 @@ Details and command results are in section 12. Production still serves the old `
 
 ## 11. Search Console checklist
 
-Do not submit the sitemap or request indexing until the prepared deploy is live and the manual items are accepted.
+The redirect and cache deploy is live. Do not submit the sitemap until the manual items in section 13 are accepted.
 
 | Item | Status |
 | --- | --- |
@@ -224,7 +222,7 @@ Do not submit the sitemap or request indexing until the prepared deploy is live 
 | `/contact` and `/team/core-team` redirect | PASS |
 | No accidental `noindex` on public pages | PASS |
 | Robots does not block pages or assets | PASS |
-| Duplicate `.html` URLs | FAIL until the prepared 301s are deployed |
+| Duplicate `.html` URLs | PASS after deploy. See section 13. |
 | Event structured data in the first HTML response | Not in the static shell. JavaScript adds it. Rich Results Test NOT TESTED. |
 
 **Inspect these URLs first, after deploy:**
@@ -341,6 +339,79 @@ An earlier automated HTTP 401 was not treated as proof that a form is broken. No
 | Production `curl -I` of the duplicate URLs and `/assets/index-dpe0Gxxg.js` | HTTP 200 and `max-age=0`, as listed above. |
 | Local Lighthouse accessibility × 3, Get Involved, mobile and desktop | 100 on all six runs. |
 
-### Still waiting for approval
+The approval in this follow-up was given after section 12 was written. The live results are in section 13. Do not submit `https://together2050.com/sitemap.xml` or request indexing from this audit.
 
-Do not commit, push, deploy, submit `https://together2050.com/sitemap.xml`, or request indexing until you approve. After deploy, recheck the five duplicate URLs, the other directory `index.html` URLs, `/assets/*` cache headers, the nine canonical pages, sitemap, robots, 404, and the contact form. Then rerun the nine-page mobile and desktop Lighthouse comparison against section 2. Only those post-deploy medians can support a performance claim.
+## 13. Post-deploy verification
+
+Commits on `main`: `5afe584` (redirects, asset cache, Collaborate underline, this report) and `40d8fd2` (restore the flat HTML files). Netlify deployed both. The live bundle is `/assets/index-DckQPNgt.js` and `/assets/index-wOUrO6wa.css`.
+
+The first deploy made `/about` redirect to `/about/` because only `about/index.html` remained, while the canonical tag still said `https://together2050.com/about`. `40d8fd2` put the flat HTML files back. The forced redirects still hide `/about.html` and `/about/index.html`. After that deploy, the slash-free routes return 200 again.
+
+### Redirects and cache
+
+Checked with `curl -I` on 23 October 2026 after `40d8fd2`. No redirect loop. Each duplicate below is one 301, then HTTP 200 on the canonical URL.
+
+| URL | Result |
+| --- | --- |
+| `/index.html` | PASS. 301 to `/` |
+| `/about.html` | PASS. 301 to `/about` |
+| `/get-involved.html` | PASS. 301 to `/get-involved` |
+| `/events/the-cost-of-perfection.html` | PASS. 301 to `/events/the-cost-of-perfection` |
+| `/about/index.html` | PASS. 301 to `/about` |
+| `/`, `/about`, `/vision`, `/what-we-do`, `/team`, `/team/advisory-council`, `/collaborate`, `/get-involved`, `/events/the-cost-of-perfection` | PASS. HTTP 200 |
+| `/about/` and the other trailing-slash routes checked | PASS. 301 back to the slash-free URL |
+| `/contact` | PASS. 301 to `/get-involved#contact` |
+| `/team/core-team` | PASS. 301 to `/team` |
+| `/no-such-page-audit-3` | PASS. HTTP 404, `noindex, nofollow`, no canonical |
+| `/assets/index-DckQPNgt.js`, `/assets/index-wOUrO6wa.css`, `/assets/ahmed-mujtaba-Bve-UFT7.webp` | PASS. `cache-control: public, max-age=31536000, immutable` |
+| HTML, sitemap, robots, `__forms.html` | PASS. Not immutable. `cache-control: public, max-age=0, must-revalidate` |
+| About canonical and robots | PASS. `https://together2050.com/about`, `index, follow` |
+| `__forms.html` | PASS. Form name `contact`, subject “General Inquiry” present |
+
+### Lighthouse after deploy
+
+**Tool:** Lighthouse 12.8.2, the same version as section 2. Headless Chrome, simulated throttling, three runs per page and device. 54 of 54 runs completed, 0 errors. Fetch times 2026-10-23T14:59:21Z through 2026-10-23T15:14:12Z. Tables are medians. These are lab results, not CrUX field data. Field Core Web Vitals remain NOT TESTED.
+
+#### Mobile median
+
+| Page | Perf | A11y | Best practices | SEO | FCP | LCP | TBT | CLS | Speed Index | Runs (perf) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Home | 93 | 100 | 100 | 100 | 2.56s | 2.56s | 0ms | 0.000 | 3.01s | 93, 94, 93 |
+| About | 93 | 100 | 100 | 100 | 2.52s | 2.52s | 0ms | 0.000 | 2.99s | 93, 90, 94 |
+| Vision | 92 | 100 | 100 | 100 | 2.53s | 2.53s | 0ms | 0.000 | 3.66s | 90, 93, 92 |
+| Our Work | 86 | 100 | 100 | 100 | 2.51s | 3.59s | 0ms | 0.000 | 3.19s | 86, 87, 86 |
+| Team | 93 | 100 | 100 | 100 | 2.56s | 2.56s | 0ms | 0.000 | 3.04s | 92, 93, 93 |
+| Advisory Council | 93 | 100 | 100 | 100 | 2.53s | 2.53s | 0ms | 0.011 | 3.17s | 92, 93, 93 |
+| Collaborate | 93 | 100 | 100 | 100 | 2.53s | 2.53s | 0ms | 0.005 | 2.99s | 94, 93, 92 |
+| Get Involved | 93 | 100 | 100 | 100 | 2.55s | 2.55s | 0ms | 0.000 | 3.14s | 93, 94, 93 |
+| The Cost of Perfection | 84 | 100 | 100 | 100 | 2.64s | 3.78s | 27ms | 0.000 | 3.31s | 83, 86, 84 |
+
+#### Desktop median
+
+| Page | Perf | A11y | Best practices | SEO | FCP | LCP | TBT | CLS | Speed Index | Runs (perf) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Home | 88 | 100 | 100 | 100 | 1.54s | 1.54s | 0ms | 0.000 | 1.71s | 88, 87, 91 |
+| About | 91 | 100 | 100 | 100 | 1.32s | 1.32s | 0ms | 0.003 | 1.56s | 91, 92, 91 |
+| Vision | 92 | 100 | 100 | 100 | 1.28s | 1.28s | 0ms | 0.000 | 1.42s | 92, 93, 92 |
+| Our Work | 81 | 100 | 100 | 100 | 1.89s | 1.89s | 0ms | 0.000 | 2.08s | 72, 81, 85 |
+| Team | 86 | 100 | 100 | 100 | 1.63s | 1.63s | 0ms | 0.000 | 1.81s | 87, 80, 86 |
+| Advisory Council | 88 | 100 | 100 | 100 | 1.52s | 1.52s | 0ms | 0.009 | 1.59s | 83, 90, 88 |
+| Collaborate | 89 | 100 | 100 | 100 | 1.39s | 1.39s | 0ms | 0.000 | 1.83s | 89, 84, 89 |
+| Get Involved | 91 | 100 | 100 | 100 | 1.34s | 1.34s | 0ms | 0.000 | 1.62s | 91, 91, 81 |
+| The Cost of Perfection | 83 | 100 | 100 | 100 | 1.63s | 1.96s | 0ms | 0.000 | 1.72s | 86, 78, 83 |
+
+#### Comparison with section 2
+
+Get Involved accessibility is 100 on all six production runs. The baseline was 96 on both devices because the closing Collaborate link was color-only. That is the measured result of the underline.
+
+Best Practices and SEO stayed 100. CLS stayed under 0.1. TBT stayed 0ms except The Cost of Perfection on mobile, whose median is 27ms from runs of 27ms, 0ms, and 32ms.
+
+Performance medians moved in both directions. Mobile Advisory Council went from 81 to 93, and desktop Team went from 71 to 86. Desktop Home went from 91 to 88, and desktop The Cost of Perfection went from 88 to 83. The baseline already showed swings of that size on a single page, including desktop About at 93, 83, and 65. The one-year asset cache does not change a first-load Lighthouse run. These performance differences are lab variation, not a demonstrated sitewide gain.
+
+### Still open
+
+1. Choose the session times: keep 8:00 PM and 9:00 PM on the site, or adopt the registration form’s 8:00–8:50 PM and 8:50–9:30 PM ranges.
+2. Leave Zain’s poster as printed, unless a replacement poster is authorized. The site title and the form agree.
+3. Confirm whether membership, ambassador, and collaboration forms should require a Google account. Registration’s first page is public; later pages were not opened.
+4. Confirm the Search Console Domain property, then submit `https://together2050.com/sitemap.xml` and inspect the nine canonical URLs. This audit did not do that.
+5. Field Core Web Vitals remain NOT TESTED.
