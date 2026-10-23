@@ -181,8 +181,8 @@ Details and command results are in sections 12 and 13. The deploy and the later 
 
 ## 9. Remaining risks
 
-1. Deploy the redirect and cache change before submitting the sitemap. Until then, the extra `.html` URLs remain HTTP 200.
-2. Get Involved scored 96 on the production baseline because the closing “Collaborate” link was distinguished by color only. An underline is now in the local source. Local Lighthouse accessibility is 100. Production is still 96 until deploy.
+1. The redirect and cache change is deployed. See section 13 before submitting the sitemap.
+2. Get Involved accessibility is 100 on production after the deploy. The baseline was 96. See section 13.
 3. The registration form and the website disagree on session times. The website was left unchanged. The exact choice is in section 12.
 4. Zain’s approved session title and the registration form agree. The poster file prints different wording. The poster was not edited.
 5. Membership, ambassador, and collaboration forms open a Google sign-in page before any form content. They are not 404s. Whether guests should be able to respond is a manual decision.
