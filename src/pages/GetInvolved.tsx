@@ -181,7 +181,10 @@ export function GetInvolved() {
 
           <p className="mt-16 max-w-2xl border-t border-ink/10 pt-10 text-sm leading-relaxed text-muted">
             For partnership proposals, visit{" "}
-            <Link to="/collaborate" className="text-ink transition-colors hover:text-red">
+            <Link
+              to="/collaborate"
+              className="text-ink underline decoration-current underline-offset-[0.18em] transition-colors hover:text-red"
+            >
               Collaborate
             </Link>
             . To join activities and contribute, choose a pathway above.

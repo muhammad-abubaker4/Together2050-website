@@ -103,10 +103,8 @@ function prerenderRouteMeta(): Plugin {
         );
 
         const nested = join(dist, page.path.slice(1), "index.html");
-        const flat = join(dist, `${page.path.slice(1)}.html`);
         mkdirSync(dirname(nested), { recursive: true });
         writeFileSync(nested, html);
-        writeFileSync(flat, html);
       }
 
       let notFound = template.replace(
