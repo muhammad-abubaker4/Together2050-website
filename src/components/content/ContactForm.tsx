@@ -1,23 +1,85 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { SITE } from "../../data/site";
 import { Button } from "../ui/Button";
 import { cn } from "../../lib/cn";
 
 type Status = "idle" | "error" | "sent";
-type Field = "name" | "email" | "message";
+type Field = "name" | "email" | "subject" | "message";
 
-const subjects = ["General enquiry", "Question", "Idea"] as const;
+const subjects = [
+  "General Inquiry",
+  "General Questions",
+  "Website Feedback",
+  "Technical Issues",
+  "Other",
+] as const;
+const MIN_MESSAGE_LENGTH = 12;
+
+const messages = {
+  name: "Please enter your full name.",
+  email: "Please enter a valid email address.",
+  subject: "Please select a subject.",
+  messageEmpty: "Please enter your message.",
+  messageShort:
+    "Please provide a little more detail so we can understand your enquiry.",
+  sending: "Sending your message...",
+  success: "Thank you. Your message has been submitted successfully.",
+  failure: `We couldn't submit your message. Please try again. If the problem continues, contact ${SITE.email}.`,
+} as const;
+
+type FormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+function isSubject(value: string): value is (typeof subjects)[number] {
+  return subjects.some((item) => item === value);
+}
+
+function validate(values: FormValues): { field: Field; message: string } | null {
+  if (!values.name.trim()) {
+    return { field: "name", message: messages.name };
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+    return { field: "email", message: messages.email };
+  }
+  if (!isSubject(values.subject)) {
+    return { field: "subject", message: messages.subject };
+  }
+  const message = values.message.trim();
+  if (!message) {
+    return { field: "message", message: messages.messageEmpty };
+  }
+  if (message.length < MIN_MESSAGE_LENGTH) {
+    return { field: "message", message: messages.messageShort };
+  }
+  return null;
+}
+
+/**
+ * Netlify accepts a recognized form with HTTP 200 and returns the form action
+ * document. An unknown form name returns 404 and the not-found page.
+ * A resolved fetch, or a 200 that is the not-found page, is not acceptance.
+ */
+async function netlifyAccepted(response: Response) {
+  if (!response.ok) return false;
+  const body = await response.text();
+  return !/<title>\s*Page not found/i.test(body);
+}
 
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState<(typeof subjects)[number]>(subjects[0]);
+  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [invalidField, setInvalidField] = useState<Field | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
   useEffect(() => {
     if (status === "sent") {
@@ -25,41 +87,56 @@ export function ContactForm() {
     }
   }, [status]);
 
-  function validate(): { field: Field; message: string } | null {
-    if (!name.trim()) {
-      return { field: "name", message: "Please enter your name." };
+  function values(): FormValues {
+    return { name, email, subject, message };
+  }
+
+  function showError(next: { field: Field; message: string }) {
+    setError(next.message);
+    setInvalidField(next.field);
+    setStatus("error");
+    document.getElementById(next.field)?.focus();
+  }
+
+  function clearFieldError(field: Field, nextValues: FormValues) {
+    if (invalidField !== field) return;
+    const problem = validate(nextValues);
+    if (!problem || problem.field !== field) {
+      setInvalidField(null);
+      setError("");
+      setStatus("idle");
+      return;
     }
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return { field: "email", message: "Please enter a valid email address." };
-    }
-    if (!message.trim() || message.trim().length < 12) {
-      return {
-        field: "message",
-        message: "Please share a little more in your message.",
-      };
-    }
-    return null;
+    setError(problem.message);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitting) return;
+    if (submittingRef.current) return;
 
-    const nextError = validate();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const submitted: FormValues = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      subject: String(data.get("subject") ?? ""),
+      message: String(data.get("message") ?? ""),
+    };
+
+    const nextError = validate(submitted);
     if (nextError) {
-      setError(nextError.message);
-      setInvalidField(nextError.field);
-      setStatus("error");
-      document.getElementById(nextError.field)?.focus();
+      showError(nextError);
       return;
     }
 
+    submittingRef.current = true;
     setSubmitting(true);
     setError("");
     setInvalidField(null);
+    setStatus("idle");
 
     const body = new URLSearchParams();
-    for (const [key, value] of new FormData(event.currentTarget)) {
+    for (const [key, value] of data) {
       body.append(key, String(value));
     }
 
@@ -69,22 +146,24 @@ export function ContactForm() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
       });
-      if (!response.ok) {
-        throw new Error(`Form submission failed (${response.status})`);
+      if (!(await netlifyAccepted(response))) {
+        throw new Error("Netlify did not accept the form");
       }
 
       setName("");
       setEmail("");
-      setSubject(subjects[0]);
+      setSubject("");
       setMessage("");
       setHoneypot("");
+      setError("");
+      setInvalidField(null);
       setStatus("sent");
     } catch {
       setStatus("error");
-      setError(
-        `Your message could not be sent. Please try again, or write to ${SITE.email}.`,
-      );
+      setError(messages.failure);
+      setInvalidField(null);
     } finally {
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }
@@ -127,7 +206,11 @@ export function ContactForm() {
           name="name"
           autoComplete="name"
           value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => {
+            const next = event.target.value;
+            setName(next);
+            clearFieldError("name", { ...values(), name: next });
+          }}
           className={fieldClass}
           required
           aria-invalid={invalidField === "name"}
@@ -145,7 +228,11 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            const next = event.target.value;
+            setEmail(next);
+            clearFieldError("email", { ...values(), email: next });
+          }}
           className={fieldClass}
           required
           aria-invalid={invalidField === "email"}
@@ -161,11 +248,17 @@ export function ContactForm() {
           id="subject"
           name="subject"
           value={subject}
-          onChange={(event) =>
-            setSubject(event.target.value as (typeof subjects)[number])
-          }
+          onChange={(event) => {
+            const next = event.target.value;
+            setSubject(next);
+            clearFieldError("subject", { ...values(), subject: next });
+          }}
           className={fieldClass}
+          required
+          aria-invalid={invalidField === "subject"}
+          aria-describedby={invalidField === "subject" ? "contact-error" : undefined}
         >
+          <option value="">Select a topic</option>
           {subjects.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -183,7 +276,11 @@ export function ContactForm() {
           name="message"
           rows={6}
           value={message}
-          onChange={(event) => setMessage(event.target.value)}
+          onChange={(event) => {
+            const next = event.target.value;
+            setMessage(next);
+            clearFieldError("message", { ...values(), message: next });
+          }}
           className={cn(fieldClass, "resize-y")}
           required
           aria-invalid={invalidField === "message"}
@@ -204,13 +301,12 @@ export function ContactForm() {
           tabIndex={-1}
           className="text-sm text-muted outline-none"
         >
-          Thank you. Your message has been sent. Together2050 will reply to the
-          email address you entered.
+          {messages.success}
         </p>
       ) : null}
 
       <Button type="submit" variant="primary" disabled={submitting}>
-        {submitting ? "Sending" : "Submit"}
+        {submitting ? messages.sending : "Submit"}
       </Button>
     </form>
   );
