@@ -112,12 +112,12 @@ export function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
-              end={link.to === "/" || link.to === "/team"}
+              end={link.to === "/" || link.to === "/team/"}
               className={({ isActive }) =>
                 cn(
                   "text-[0.62rem] font-medium tracking-[0.12em] uppercase transition-colors",
                   isActive ||
-                    (link.to === "/what-we-do" &&
+                    (link.to === "/what-we-do/" &&
                       location.pathname.startsWith("/events"))
                     ? "text-red"
                     : "text-paper/80 hover:text-paper",
@@ -165,13 +165,13 @@ export function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
-              end={link.to === "/" || link.to === "/team"}
+              end={link.to === "/" || link.to === "/team/"}
               onClick={closeMenu}
               className={({ isActive }) =>
                 cn(
                   "block border-b border-paper/10 py-3 text-sm tracking-[0.16em] uppercase",
                   isActive ||
-                    (link.to === "/what-we-do" &&
+                    (link.to === "/what-we-do/" &&
                       location.pathname.startsWith("/events"))
                     ? "font-semibold text-red"
                     : "text-paper",

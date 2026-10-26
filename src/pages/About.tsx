@@ -6,9 +6,9 @@ import { PAGE_SEO } from "../data/site";
 import { founderMessage } from "../data/team";
 
 const participationLinks = [
-  { label: "Our Work", to: "/what-we-do" },
-  { label: "Collaborate", to: "/collaborate" },
-  { label: "Get Involved", to: "/get-involved" },
+  { label: "Our Work", to: "/what-we-do/" },
+  { label: "Collaborate", to: "/collaborate/" },
+  { label: "Get Involved", to: "/get-involved/" },
 ] as const;
 
 export function About() {

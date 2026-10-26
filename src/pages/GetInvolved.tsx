@@ -20,7 +20,7 @@ const paths = [
     title: "Contribute Your Skills",
     body: "For people who want to help with initiatives and collaborative work. Write to us and say how you can help.",
     action: "Write to us",
-    to: "/get-involved#contact",
+    to: "/get-involved/#contact",
   },
   {
     number: "03",
@@ -182,7 +182,7 @@ export function GetInvolved() {
           <p className="mt-16 max-w-2xl border-t border-ink/10 pt-10 text-sm leading-relaxed text-muted">
             For partnership proposals, visit{" "}
             <Link
-              to="/collaborate"
+              to="/collaborate/"
               className="text-ink underline decoration-current underline-offset-[0.18em] transition-colors hover:text-red"
             >
               Collaborate

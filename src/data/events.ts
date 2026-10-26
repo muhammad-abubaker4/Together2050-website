@@ -27,7 +27,7 @@ const STATUS_ZONE_OFFSET = "+05:00";
 
 export const speakerSeries = {
   slug: "the-cost-of-perfection",
-  path: "/events/the-cost-of-perfection",
+  path: "/events/the-cost-of-perfection/",
   title: "The Cost of Perfection",
   theme:
     "Behind the pressure to succeed, there is a generation struggling to be heard.",

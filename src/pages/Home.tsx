@@ -59,7 +59,7 @@ function Hero() {
             create initiatives, and contribute to a better future.
           </p>
           <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Button to="/about" className="w-full sm:w-auto">
+            <Button to="/about/" className="w-full sm:w-auto">
               Explore Together2050
             </Button>
             <Button
@@ -99,10 +99,10 @@ function Idea() {
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-            <TextLink to="/about" tone="light">
+            <TextLink to="/about/" tone="light">
               Discover Our Purpose
             </TextLink>
-            <TextLink to="/vision" tone="light">
+            <TextLink to="/vision/" tone="light">
               Read the Vision
             </TextLink>
           </div>
@@ -194,7 +194,7 @@ function Building() {
         </article>
 
         <div className="mt-8">
-          <TextLink to="/what-we-do" tone="light">
+          <TextLink to="/what-we-do/" tone="light">
             Explore Our Work
           </TextLink>
         </div>
@@ -225,7 +225,7 @@ function Borders() {
           </p>
         </div>
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-          <TextLink to="/get-involved">Get involved</TextLink>
+          <TextLink to="/get-involved/">Get involved</TextLink>
           <TextLink href={FORMS.collaboration}>Collaborate</TextLink>
         </div>
         </div>
@@ -287,7 +287,7 @@ function TakePart() {
             title="Contribute Your Skills"
             body="For people who want to help with initiatives and collaborative work. Write to us and say how you can help."
             action="Write to us"
-            to="/get-involved#contact"
+            to="/get-involved/#contact"
           />
           <Pathway
             number="03"
@@ -329,7 +329,7 @@ function Close() {
           beyond any single event.
         </p>
         <div className="mt-8">
-          <TextLink to="/vision" tone="light">
+          <TextLink to="/vision/" tone="light">
             Read the Vision
           </TextLink>
         </div>
@@ -398,7 +398,7 @@ function Pathway({
           {action}
         </Button>
       ) : (
-        <Button to={to ?? "/get-involved#contact"} className="w-full whitespace-nowrap">
+        <Button to={to ?? "/get-involved/#contact"} className="w-full whitespace-nowrap">
           {action}
         </Button>
       )}

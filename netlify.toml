@@ -25,12 +25,22 @@
 
 [[redirects]]
   from = "/team/core-team"
-  to = "/team"
+  to = "/team/"
+  status = 301
+
+[[redirects]]
+  from = "/team/core-team/"
+  to = "/team/"
   status = 301
 
 [[redirects]]
   from = "/contact"
-  to = "/get-involved#contact"
+  to = "/get-involved/#contact"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/get-involved/#contact"
   status = 301
 
 [[redirects]]
@@ -41,54 +51,94 @@
 
 [[redirects]]
   from = "/about.html"
-  to = "/about"
+  to = "/about/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/vision.html"
-  to = "/vision"
+  to = "/vision/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/what-we-do.html"
-  to = "/what-we-do"
+  to = "/what-we-do/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/team.html"
-  to = "/team"
+  to = "/team/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/team/advisory-council.html"
-  to = "/team/advisory-council"
+  to = "/team/advisory-council/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/collaborate.html"
-  to = "/collaborate"
+  to = "/collaborate/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/get-involved.html"
-  to = "/get-involved"
+  to = "/get-involved/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/events/the-cost-of-perfection.html"
-  to = "/events/the-cost-of-perfection"
+  to = "/events/the-cost-of-perfection/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/*/index.html"
-  to = "/:splat"
+  to = "/:splat/"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/vision"
+  to = "/vision/"
+  status = 301
+
+[[redirects]]
+  from = "/what-we-do"
+  to = "/what-we-do/"
+  status = 301
+
+[[redirects]]
+  from = "/team"
+  to = "/team/"
+  status = 301
+
+[[redirects]]
+  from = "/team/advisory-council"
+  to = "/team/advisory-council/"
+  status = 301
+
+[[redirects]]
+  from = "/collaborate"
+  to = "/collaborate/"
+  status = 301
+
+[[redirects]]
+  from = "/get-involved"
+  to = "/get-involved/"
+  status = 301
+
+[[redirects]]
+  from = "/events/the-cost-of-perfection"
+  to = "/events/the-cost-of-perfection/"
+  status = 301

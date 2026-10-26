@@ -154,10 +154,10 @@ export function EventDetail() {
             ambassadorship, and collaboration stay open beside them.
           </p>
           <div className="mt-8 flex flex-wrap gap-6 text-sm tracking-[0.14em] uppercase">
-            <Link to="/what-we-do#programs" className="text-paper hover:text-red">
+            <Link to="/what-we-do/#programs" className="text-paper hover:text-red">
               Our Work
             </Link>
-            <Link to="/get-involved" className="text-paper hover:text-red">
+            <Link to="/get-involved/" className="text-paper hover:text-red">
               Get Involved
             </Link>
           </div>

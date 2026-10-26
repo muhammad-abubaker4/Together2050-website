@@ -102,12 +102,37 @@ function prerenderRouteMeta(): Plugin {
           jsonLdScript(pageSchema(page, url)),
         );
 
-        const nested = join(dist, page.path.slice(1), "index.html");
-        const flat = join(dist, `${page.path.slice(1)}.html`);
+        const relative = page.path.replace(/^\/+|\/+$/g, "");
+        const nested = join(dist, relative, "index.html");
         mkdirSync(dirname(nested), { recursive: true });
         writeFileSync(nested, html);
-        writeFileSync(flat, html);
       }
+
+      const sitemapPages = [
+        { path: "/", changefreq: "monthly", priority: "1.0" },
+        ...INDEXABLE_PAGES.map((page) => ({
+          path: page.path,
+          changefreq: page.path.startsWith("/events/") ? "weekly" : "monthly",
+          priority: page.path.startsWith("/events/")
+            ? "0.9"
+            : page.path === "/team/" ||
+                page.path === "/team/advisory-council/" ||
+                page.path === "/collaborate/"
+              ? "0.7"
+              : "0.8",
+        })),
+      ];
+      const sitemap = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...sitemapPages.map(
+          (page) =>
+            `  <url>\n    <loc>${SITE.url}${page.path}</loc>\n    <changefreq>${page.changefreq}</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`,
+        ),
+        "</urlset>",
+        "",
+      ].join("\n");
+      writeFileSync(join(dist, "sitemap.xml"), sitemap);
 
       let notFound = template.replace(
         /<title>[^<]*<\/title>/,
