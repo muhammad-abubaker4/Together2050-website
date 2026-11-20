@@ -3,6 +3,7 @@ import { Button } from "../components/ui/Button";
 import { Seo } from "../components/ui/Seo";
 import { PageHero } from "../components/ui/PageHero";
 import {
+  eventPhase,
   eventPhaseLabel,
   sessionImageAlt,
   sessionTopic,
@@ -87,13 +88,15 @@ export function EventDetail() {
           </div>
           <div className="max-w-3xl space-y-6 text-base leading-relaxed text-ink text-pretty sm:text-lg">
             <p>{speakerSeries.summary}</p>
-            <Button
-              href={speakerSeries.registrationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Register
-            </Button>
+            {eventPhase() !== "completed" ? (
+              <Button
+                href={speakerSeries.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Register
+              </Button>
+            ) : null}
           </div>
         </div>
 

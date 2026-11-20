@@ -49,6 +49,7 @@ const sections: { id: string; name: string; members: Person[] }[] = [
       personById(communicationsTeam, "dua-amjad"),
       personById(communicationsTeam, "ahmed-mujtaba"),
       personById(researchTeam, "muhammad-hassan"),
+      personById(communityOutreach, "zainab-rehmat-ali"),
     ],
   },
 ];

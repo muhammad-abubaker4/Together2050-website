@@ -16,6 +16,7 @@ import photoMostafa from "../assets/people/mostafa-kabir-siddiqui.webp";
 import photoSama from "../assets/people/sama-zaidi.webp";
 import photoMehwish from "../assets/people/mehwish-rana.webp";
 import photoIqbal from "../assets/people/iqbal-naeem.webp";
+import photoZainab from "../assets/people/zainab-rehmat-ali.webp";
 
 const PORTRAITS: Record<string, string> = {
   "muhammad-abubaker": photoAbubaker,
@@ -28,6 +29,7 @@ const PORTRAITS: Record<string, string> = {
   "saira-gulzar": photoSaira,
   "muhammad-hassan": photoHassan,
   "aimen-sultan": photoAimen,
+  "zainab-rehmat-ali": photoZainab,
   "azmat-wazir": photoAzmat,
   "hafsa-khalil": photoHafsa,
   "tariq-mehmood": photoTariq,

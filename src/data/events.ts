@@ -2,6 +2,7 @@ import posterNageen from "../assets/events/nageen-malik.webp";
 import posterSama from "../assets/events/sama-zaidi.webp";
 import posterTaskeen from "../assets/events/taskeen-idrees.webp";
 import posterZain from "../assets/events/zain-ul-islam.webp";
+import posterYouthDialogue from "../assets/events/the-youth-dialogue.webp";
 
 export type EventPhase = "upcoming" | "in-progress" | "completed";
 
@@ -117,6 +118,42 @@ export function eventPhase(now = new Date()): EventPhase {
 
 export function eventPhaseLabel(now = new Date()) {
   return PHASE_LABEL[eventPhase(now)];
+}
+
+export const youthDialogue = {
+  slug: "the-youth-dialogue",
+  path: "/events/the-youth-dialogue/",
+  title: "THE YOUTH DIALOGUE",
+  tagline: "Ideas. Perspectives. Possibilities.",
+  summary:
+    "THE YOUTH DIALOGUE is a recurring online panel discussion series bringing young people together to explore relevant issues, exchange perspectives, ask questions, and learn through meaningful conversations.",
+  details: [
+    { label: "Format", value: "Online panel discussions" },
+    { label: "Platform", value: "Google Meet" },
+    { label: "Frequency", value: "Weekly" },
+    { label: "Running through", value: "January 2027" },
+    { label: "Registration", value: "Free" },
+    { label: "Registration model", value: "One registration for the entire series" },
+  ],
+  topics: [
+    "Education and learning",
+    "Career choices and professional development",
+    "Personal growth",
+    "Digital safety and online challenges",
+    "Issues and challenges faced by young people",
+    "Future opportunities and the changing world",
+  ],
+  registrationUrl: "https://forms.gle/cDmkzcXxWvumkzcr6",
+  poster: posterYouthDialogue,
+  posterAlt:
+    "THE YOUTH DIALOGUE poster. Ideas. Perspectives. Possibilities. Online panel discussions on Google Meet, weekly, running through January 2027. Register once to join the series.",
+  width: 880,
+  height: 1100,
+  endsAt: `2027-01-31T23:59:00${STATUS_ZONE_OFFSET}`,
+} as const;
+
+export function youthDialoguePhaseLabel(now = new Date()) {
+  return now <= new Date(youthDialogue.endsAt) ? "Ongoing" : "Completed";
 }
 
 export function sessionTopic(session: SpeakerSession) {

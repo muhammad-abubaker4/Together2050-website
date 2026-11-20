@@ -11,6 +11,7 @@ import { NotFound } from "./pages/NotFound";
 import { RouteError } from "./pages/RouteError";
 import { VisionMission } from "./pages/VisionMission";
 import { WhatWeDo } from "./pages/WhatWeDo";
+import { YouthDialogue } from "./pages/YouthDialogue";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
           { path: "collaborate", element: <Collaborate /> },
           { path: "get-involved", element: <GetInvolved /> },
           { path: "events/the-cost-of-perfection", element: <EventDetail /> },
+          { path: "events/the-youth-dialogue", element: <YouthDialogue /> },
           { path: "contact", element: <Navigate to="/get-involved/#contact" replace /> },
           { path: "*", element: <NotFound /> },
         ],

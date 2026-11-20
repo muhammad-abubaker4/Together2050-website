@@ -11,6 +11,7 @@
 /collaborate.html    /collaborate/    301!
 /get-involved.html    /get-involved/    301!
 /events/the-cost-of-perfection.html    /events/the-cost-of-perfection/    301!
+/events/the-youth-dialogue.html    /events/the-youth-dialogue/    301!
 /*/index.html    /:splat/    301!
 /about    /about/    301
 /vision    /vision/    301
@@ -20,3 +21,4 @@
 /collaborate    /collaborate/    301
 /get-involved    /get-involved/    301
 /events/the-cost-of-perfection    /events/the-cost-of-perfection/    301
+/events/the-youth-dialogue    /events/the-youth-dialogue/    301

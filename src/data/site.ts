@@ -3,8 +3,7 @@ export const SITE = {
   tagline: "Together, We Create What Matters.",
   description:
     "A platform that brings people, ideas, and opportunities together to learn, collaborate, contribute, and create meaningful progress toward 2050 and beyond.",
-  email: "info@together2050.com",
-  secondaryEmail: "officialtogether2050@gmail.com",
+  email: "officialtogether2050@gmail.com",
   phones: ["+92 343 3729053"] as const,
   whatsappChannel: "https://whatsapp.com/channel/0029VbCzuJBG8l5AlECIi803",
   url: "https://together2050.com",
@@ -107,6 +106,12 @@ export const PAGE_SEO = {
     description:
       "An online speaker series on 24 and 25 October 2026, with Taskeen Idrees, Zain Ul Islam, Sama Zaidi, and Nageen Malik.",
     path: "/events/the-cost-of-perfection/",
+  },
+  youthDialogue: {
+    title: "THE YOUTH DIALOGUE | Together2050",
+    description:
+      "A weekly online panel discussion series by Together2050, bringing young people together to explore relevant issues and exchange perspectives. Free registration, running through January 2027.",
+    path: "/events/the-youth-dialogue/",
   },
   team: {
     title: "Team | Together2050",

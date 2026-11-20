@@ -131,6 +131,16 @@ export const communityOutreach: Person[] = [
       "Contributes to community engagement, outreach initiatives, and participant coordination.",
     bio: "Aimen Sultan is the Director of Community & Outreach at Together2050, where she contributes to community engagement, outreach initiatives, and participant coordination. She supports the planning and execution of organizational activities, helps foster meaningful connections with participants and partners, and contributes to creating an engaging and inclusive experience across Together2050's sessions and initiatives.",
   },
+  {
+    id: "zainab-rehmat-ali",
+    name: "Zainab Rehmat Ali",
+    role: "Programs & Events Coordinator, Together2050",
+    initials: "ZR",
+    linkedin: "https://www.linkedin.com/in/zainab-rehmat-ali-b6560b23a/",
+    summary:
+      "Supports the planning, coordination, and delivery of programs, sessions, and events, with a focus on accessibility and inclusion.",
+    bio: "Zainab Rehmat Ali serves as the Programs & Events Coordinator at Together2050, where she supports the planning, coordination, and delivery of the organization's programs, sessions, and events. With a background in special education, she contributes to making Together2050's activities accessible, inclusive, and welcoming for everyone, and supports the development of initiatives that bring people from different backgrounds together.",
+  },
 ];
 
 export const coreTeam: Person[] = [

@@ -98,6 +98,12 @@
   force = true
 
 [[redirects]]
+  from = "/events/the-youth-dialogue.html"
+  to = "/events/the-youth-dialogue/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*/index.html"
   to = "/:splat/"
   status = 301
@@ -141,4 +147,9 @@
 [[redirects]]
   from = "/events/the-cost-of-perfection"
   to = "/events/the-cost-of-perfection/"
+  status = 301
+
+[[redirects]]
+  from = "/events/the-youth-dialogue"
+  to = "/events/the-youth-dialogue/"
   status = 301

@@ -7,6 +7,8 @@ import {
   eventPhaseLabel,
   speakerSeries,
   speakerSessions,
+  youthDialogue,
+  youthDialoguePhaseLabel,
 } from "../data/events";
 import { pillars } from "../data/pillars";
 import { FORMS, PAGE_SEO } from "../data/site";
@@ -173,7 +175,28 @@ function Building() {
           What is confirmed is listed here.
         </p>
 
-        <article className="mt-12 grid gap-6 border-y border-ink/10 py-8 sm:py-10 lg:grid-cols-[9rem_minmax(0,1fr)_auto] lg:items-end lg:gap-10">
+        <article className="mt-12 grid gap-6 border-t border-ink/10 py-8 sm:py-10 lg:grid-cols-[9rem_minmax(0,1fr)_auto] lg:items-end lg:gap-10">
+          <p className="text-[0.7rem] font-medium tracking-[0.22em] uppercase text-red">
+            {youthDialoguePhaseLabel()}
+          </p>
+          <div>
+            <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
+              {youthDialogue.title}
+            </h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+              {youthDialogue.tagline} Weekly online panel discussions for young
+              people.
+            </p>
+            <p className="mt-3 text-sm text-ink">
+              Weekly, through January 2027 · Online
+            </p>
+          </div>
+          <TextLink to={youthDialogue.path} tone="light">
+            View the series
+          </TextLink>
+        </article>
+
+        <article className="grid gap-6 border-y border-ink/10 py-8 sm:py-10 lg:grid-cols-[9rem_minmax(0,1fr)_auto] lg:items-end lg:gap-10">
           <p className="text-[0.7rem] font-medium tracking-[0.22em] uppercase text-red">
             {eventPhaseLabel()}
           </p>

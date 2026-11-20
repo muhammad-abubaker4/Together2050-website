@@ -3,12 +3,15 @@ import { Button } from "../components/ui/Button";
 import { PageHero } from "../components/ui/PageHero";
 import { Seo } from "../components/ui/Seo";
 import {
+  eventPhase,
   eventPhaseLabel,
   sessionImageAlt,
   sessionTopic,
   sessionsByDate,
   speakerSeries,
   speakerSessions,
+  youthDialogue,
+  youthDialoguePhaseLabel,
 } from "../data/events";
 import { offerings } from "../data/offerings";
 import { pillars } from "../data/pillars";
@@ -33,6 +36,7 @@ export function WhatWeDo() {
         eyebrow="Our Work"
         title="Learn, connect, collaborate, and contribute."
       />
+      <YouthDialogueSeries />
       <Series />
       <Pillars />
       <Areas />
@@ -40,9 +44,95 @@ export function WhatWeDo() {
   );
 }
 
-function Series() {
+function YouthDialogueSeries() {
+  const details = [
+    {
+      heading: "The series",
+      rows: youthDialogue.details.filter((item) =>
+        ["Format", "Platform"].includes(item.label),
+      ),
+    },
+    {
+      heading: "Schedule",
+      rows: youthDialogue.details.filter((item) =>
+        ["Frequency", "Running through"].includes(item.label),
+      ),
+    },
+  ];
+
   return (
     <section id="programs" className="bg-paper py-16 text-ink sm:py-20 lg:py-24">
+      <div className="container-site">
+        <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
+          {youthDialoguePhaseLabel()}
+        </p>
+        <h2 className="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          {youthDialogue.title}
+        </h2>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
+          {youthDialogue.tagline} Weekly online panel discussions for young
+          people.
+        </p>
+        <ul className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+          <li>
+            <img
+              src={youthDialogue.poster}
+              alt={youthDialogue.posterAlt}
+              width={youthDialogue.width}
+              height={youthDialogue.height}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full rounded-[5px] border border-ink/10 object-contain"
+            />
+          </li>
+        </ul>
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {details.map((block) => (
+            <div key={block.heading}>
+              <h3 className="text-base font-medium tracking-tight sm:text-lg">
+                {block.heading}
+              </h3>
+              <ol className="mt-4 border-t border-ink/10">
+                {block.rows.map((row) => (
+                  <li
+                    key={row.label}
+                    className="grid gap-2 border-b border-ink/10 py-5 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6"
+                  >
+                    <p className="text-sm text-red">{row.label}</p>
+                    <h4 className="text-xl font-medium tracking-tight">
+                      {row.value}
+                    </h4>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+          {youthDialoguePhaseLabel() === "Ongoing" ? (
+            <Button
+              href={youthDialogue.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Register
+            </Button>
+          ) : null}
+          <Link
+            to={youthDialogue.path}
+            className="text-sm tracking-[0.14em] uppercase hover:text-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+          >
+            View the series
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Series() {
+  return (
+    <section id="the-cost-of-perfection" className="border-t border-ink/10 bg-paper py-16 text-ink sm:py-20 lg:py-24">
       <div className="container-site">
         <p className="text-[0.7rem] font-medium tracking-[0.28em] uppercase text-red">
           {eventPhaseLabel()}
@@ -96,13 +186,15 @@ function Series() {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-          <Button
-            href={speakerSeries.registrationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Register
-          </Button>
+          {eventPhase() !== "completed" ? (
+            <Button
+              href={speakerSeries.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Register
+            </Button>
+          ) : null}
           <Link
             to={speakerSeries.path}
             className="text-sm tracking-[0.14em] uppercase hover:text-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
@@ -158,8 +250,8 @@ function Areas() {
           Areas of work
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
-          The Cost of Perfection is the confirmed program. These areas are the
-          wider work Together2050 aims to develop.
+          THE YOUTH DIALOGUE and The Cost of Perfection are our confirmed
+          programs. These areas are the wider work Together2050 aims to develop.
         </p>
         <ol className="mt-12 border-t border-ink/10">
           {offerings.map((offering) => (

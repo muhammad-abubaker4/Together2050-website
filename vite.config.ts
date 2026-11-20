@@ -14,6 +14,7 @@ const INDEXABLE_PAGES = [
   PAGE_SEO.collaborate,
   PAGE_SEO.getInvolved,
   PAGE_SEO.costOfPerfection,
+  PAGE_SEO.youthDialogue,
 ] as const;
 
 function escapeAttr(value: string) {

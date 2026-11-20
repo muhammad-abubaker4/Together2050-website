@@ -73,12 +73,6 @@ export function Footer() {
             >
               {SITE.email}
             </a>
-            <a
-              href={`mailto:${SITE.secondaryEmail}`}
-              className="mt-2 block text-sm text-stone transition-colors hover:text-red"
-            >
-              {SITE.secondaryEmail}
-            </a>
             <SocialLinks className="mt-6" />
           </div>
         </div>
