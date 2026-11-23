@@ -1,3 +1,6 @@
+https://www.together2050.com/*    https://together2050.com/:splat    301!
+http://www.together2050.com/*    https://together2050.com/:splat    301!
+http://together2050.com/*    https://together2050.com/:splat    301!
 /team/core-team    /team/    301
 /team/core-team/    /team/    301
 /contact    /get-involved/#contact    301

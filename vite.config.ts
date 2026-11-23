@@ -49,6 +49,20 @@ function pageSchema(page: (typeof INDEXABLE_PAGES)[number], url: string) {
   };
 }
 
+function staticContent(heading: string, description: string) {
+  const links = [
+    { path: "/", title: "Home" },
+    ...INDEXABLE_PAGES.map((page) => ({
+      path: page.path,
+      title: page.title.replace(/\s*\|\s*Together2050$/, ""),
+    })),
+  ];
+  const nav = links
+    .map((link) => `<li><a href="${link.path}">${escapeAttr(link.title)}</a></li>`)
+    .join("");
+  return `<div id="root"><main id="main-content" class="container-site pt-32 pb-20"><h1>${escapeAttr(heading)}</h1><p>${escapeAttr(description)}</p><nav aria-label="Pages"><ul>${nav}</ul></nav></main></div>`;
+}
+
 function prerenderRouteMeta(): Plugin {
   return {
     name: "prerender-route-meta",
@@ -103,12 +117,18 @@ function prerenderRouteMeta(): Plugin {
           jsonLdScript(pageSchema(page, url)),
         );
 
+        html = html.replace(
+          '<div id="root"></div>',
+          staticContent(page.title.replace(/\s*\|\s*Together2050$/, ""), page.description),
+        );
+
         const relative = page.path.replace(/^\/+|\/+$/g, "");
         const nested = join(dist, relative, "index.html");
         mkdirSync(dirname(nested), { recursive: true });
         writeFileSync(nested, html);
       }
 
+      const lastmod = new Date().toISOString().slice(0, 10);
       const sitemapPages = [
         { path: "/", changefreq: "monthly", priority: "1.0" },
         ...INDEXABLE_PAGES.map((page) => ({
@@ -128,7 +148,7 @@ function prerenderRouteMeta(): Plugin {
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         ...sitemapPages.map(
           (page) =>
-            `  <url>\n    <loc>${SITE.url}${page.path}</loc>\n    <changefreq>${page.changefreq}</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`,
+            `  <url>\n    <loc>${SITE.url}${page.path}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${page.changefreq}</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`,
         ),
         "</urlset>",
         "",
@@ -154,6 +174,11 @@ function prerenderRouteMeta(): Plugin {
         "",
       );
       writeFileSync(join(dist, "404.html"), notFound);
+
+      writeFileSync(
+        join(dist, "index.html"),
+        template.replace('<div id="root"></div>', staticContent(SITE.name, SITE.description)),
+      );
     },
   };
 }
